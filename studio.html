@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ZoneCo Site Studio</title>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:'Libre Franklin';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/librefranklin-400.woff2) format('woff2')}
+@font-face{font-family:'Libre Franklin';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/librefranklin-500.woff2) format('woff2')}
+@font-face{font-family:'Libre Franklin';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/librefranklin-600.woff2) format('woff2')}
+:root{--ink:#0E0F0D;--paper:#F5F4EF;--paper-2:#E9E7DF;--ochre:#D9A21B;--slate:#4D5F6E;--sage:#B9BDA9;--brick:#8E5A48;--mute:#6B6E66;--line:rgba(14,15,13,.14);--ok:#2D996B}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Libre Franklin','Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+header.top{background:var(--ink);color:var(--paper)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+header.top img{height:26px;width:auto;display:block}
+header.top .t{display:flex;align-items:center;gap:14px}
+header.top .t span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);padding-left:14px;border-left:1px solid rgba(245,244,239,.25)}
+header.top a.live{font-size:13px;color:var(--paper);text-decoration:none;border:1px solid rgba(245,244,239,.35);padding:8px 12px;white-space:nowrap}
+header.top a.live:hover{background:var(--paper);color:var(--ink)}
+.intro{padding:40px 0 8px}
+.intro h1{font-size:clamp(26px,3.2vw,38px);font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-bottom:12px}
+.intro p{max-width:760px;color:#3a3c37;font-size:16px}
+.intro p+p{margin-top:8px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 0}
+.steps div{background:#fff;border:1px solid var(--line);padding:16px 18px;font-size:14px}
+.steps>div>b:first-child{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.steps a{color:var(--ink)}
+section.block{padding:44px 0 8px}
+section.block>.wrap>h2{font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+section.block>.wrap>.sub{color:var(--mute);margin-bottom:22px;max-width:760px}
+.studio{display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line)}
+.panel .sec{padding:20px 22px;border-top:1px solid var(--line)}
+.panel .sec:first-child{border-top:0}
+.panel h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:12px;font-weight:500}
+.hint{font-size:13px;color:var(--mute);margin-top:8px}
+.choice{display:flex;flex-direction:column;gap:8px}
+.choice label{display:flex;gap:10px;align-items:flex-start;font-size:14px;cursor:pointer}
+.choice input{margin-top:3px}
+.file{margin-top:10px}
+.file input{font-size:13px;width:100%}
+.file label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px}
+.file label:first-child{margin-top:0}
+.range{display:flex;align-items:center;gap:12px;margin-top:6px}
+.range input{flex:1;accent-color:var(--ochre)}
+.range output{font-variant-numeric:tabular-nums;font-size:13px;min-width:44px;text-align:right}
+.colors{display:grid;grid-template-columns:1fr;gap:10px}
+.color{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center}
+.color input[type=color]{width:44px;height:36px;border:1px solid var(--line);padding:2px;background:#fff;cursor:pointer}
+.color .n{font-size:14px;font-weight:500}
+.color .d{font-size:12px;color:var(--mute);line-height:1.35}
+.color code{font-size:12px;color:var(--mute);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s,color .15s}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.fill{background:var(--ink);color:var(--paper)}
+.btn.fill:hover{background:var(--slate);border-color:var(--slate)}
+.btn.accent{background:var(--ochre);border-color:var(--ochre);color:var(--ink)}
+.btn.accent:hover{background:#E8B43A;border-color:#E8B43A;color:var(--ink)}
+.btn.sm{padding:8px 12px;font-size:13px}
+.btn[disabled]{opacity:.55;cursor:default}
+textarea,input[type=text],input[type=email],select{width:100%;background:#fff;border:1px solid var(--line);padding:12px 13px;font:inherit;font-size:15px;color:var(--ink)}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--ochre);outline-offset:1px;border-color:transparent}
+textarea{min-height:110px;resize:vertical}
+.lbl{display:block;font-size:13px;color:var(--mute);margin-bottom:6px}
+.preview{position:sticky;top:16px}
+.pv-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.pv-bar select{width:auto;max-width:360px;padding:9px 12px;font-size:14px}
+.pv-bar .sp{flex:1}
+.frame-wrap{position:relative;background:var(--ink);border:1px solid var(--line);overflow:hidden;height:620px}
+.frame-wrap iframe{position:absolute;top:0;left:0;width:1280px;height:calc(620px / var(--s,1));border:0;transform-origin:0 0;transform:scale(var(--s,1));background:var(--paper)}
+.pv-note{font-size:13px;color:var(--mute);margin-top:10px}
+.badge{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--paper-2);color:var(--mute)}
+.badge.on{background:#E3F2EA;color:#1F6B4A}
+.msg{display:none;padding:14px 16px;border:1px solid var(--line);background:#fff;font-size:14px;margin-top:14px}
+.msg.ok{display:block;border-color:var(--ok);background:#EEF7F2}
+.msg.err{display:block;border-color:var(--brick);background:#F8EFEC}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.request{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px}
+.request .full{grid-column:1/-1}
+.pages{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 18px;margin-top:6px}
+.pages a{font-size:14px;color:var(--ink);text-decoration:none;padding:6px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}
+.pages a:hover{color:var(--slate)}
+.pages a small{color:var(--mute);font-size:12px;white-space:nowrap}
+footer.bot{padding:44px 0 56px;color:var(--mute);font-size:13px}
+footer.bot .wrap{border-top:1px solid var(--line);padding-top:22px}
+@media (max-width:640px){header.top .t span{display:none}header.top a.live{padding:7px 9px;font-size:12px}}
+@media (max-width:1000px){.studio{grid-template-columns:1fr}.preview{position:static}.steps{grid-template-columns:1fr}.request{grid-template-columns:1fr}.frame-wrap{height:520px}.frame-wrap iframe{height:calc(520px / var(--s,1))}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="t"><img src="assets/img/logo.png" alt="ZoneCo"><span>Site Studio</span></div>
+    <a class="live" href="index.html" target="_blank" rel="noopener">Open the new site ↗</a>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <h1>Review the new site and send changes to Josh.</h1>
+    <p>This is a private page for ZoneCo. Nothing you do here changes the live site by itself: you try things out, and when you click <b>Send to Josh</b>, he gets your choices, files, and notes and applies them. Think of it as the note you'd send a web designer, with a live preview attached.</p>
+    <div class="steps">
+      <div><b>1 · Look</b>Browse the new site in the preview below, or <a href="index.html" target="_blank" rel="noopener">open it in a new tab</a> and click around.</div>
+      <div><b>2 · Try</b>Upload your logo and adjust colors below. The preview updates instantly. Only you see it.</div>
+      <div><b>3 · Send</b>Click <strong>Send to Josh</strong>. For anything else (words, photos, a new news item), use <a href="#request">Request a change</a>.</div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="brand">
+  <div class="wrap">
+    <h2>Logo and colors</h2>
+    <p class="sub">The logo currently on the new site is the ZONECO wordmark copied from thezoneco.com. If you have the original artwork from your designer, upload it here; it will be sharper and the colors will be exact.</p>
+
+    <div class="studio">
+      <form class="panel" id="brandForm" name="site-studio-brand" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="studio.html">
+        <input type="hidden" name="form-name" value="site-studio-brand">
+        <input type="hidden" name="settings" id="settings">
+        <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <div class="sec">
+          <h3>Logo</h3>
+          <div class="choice">
+            <label><input type="radio" name="logo-choice" value="current" checked> <span>Keep the current logo (the ZONECO wordmark from thezoneco.com)</span></label>
+            <label><input type="radio" name="logo-choice" value="upload"> <span>Use the file I'm uploading</span></label>
+          </div>
+          <div class="file">
+            <label for="logo-file">Logo for dark backgrounds (white / “reversed” version)</label>
+            <input type="file" id="logo-file" name="logo-reversed" accept=".svg,.png,.jpg,.jpeg,.webp,.ai,.eps,.pdf">
+            <label for="logo-std">Standard color version (if you have it)</label>
+            <input type="file" id="logo-std" name="logo-standard" accept=".svg,.png,.jpg,.jpeg,.webp,.ai,.eps,.pdf">
+            <label for="brand-guide">Brand guide or color sheet (optional)</label>
+            <input type="file" id="brand-guide" name="brand-guide" accept=".pdf,.png,.jpg,.jpeg,.ai,.docx,.pptx">
+          </div>
+          <p class="hint" id="logoHint">The header and footer are dark, so the white version is the one that matters. Vector files (.svg, .ai, .eps, .pdf) are best. Files up to about 8 MB each.</p>
+          <div style="margin-top:14px">
+            <span class="lbl">Logo size in the header</span>
+            <div class="range"><input type="range" id="logoH" min="24" max="44" step="1" value="32"><output id="logoHOut">32 px</output></div>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3>Colors</h3>
+          <div class="colors" id="colors"></div>
+          <div class="row" style="margin-top:14px">
+            <button type="button" class="btn sm" id="resetColors">Reset to current</button>
+            <span class="hint" style="margin:0">Tip: change one at a time and watch the preview.</span>
+          </div>
+        </div>
+
+        <div class="sec">
+          <h3>Send to Josh</h3>
+          <label class="lbl" for="b-name">Your name</label>
+          <input type="text" id="b-name" name="name" value="Sean Suder" required style="margin-bottom:10px">
+          <label class="lbl" for="b-email">Your email</label>
+          <input type="email" id="b-email" name="email" value="sean@ssuder.com" required style="margin-bottom:10px">
+          <label class="lbl" for="b-note">Notes (optional)</label>
+          <textarea id="b-note" name="note" placeholder="Anything Josh should know: “use the yellow from the plus signs for the menu button,” “logo feels too small,” etc."></textarea>
+          <div class="row" style="margin-top:14px">
+            <button type="submit" class="btn accent" id="brandSend">Send to Josh</button>
+            <span class="hint" style="margin:0">Sends your files, color choices, and notes. Nothing goes live until Josh applies it.</span>
+          </div>
+          <div class="msg" id="brandMsg"></div>
+        </div>
+      </form>
+
+      <div class="preview">
+        <div class="pv-bar">
+          <select id="pagePick" aria-label="Page to preview"></select>
+          <button type="button" class="btn sm" id="toTop">Top of page</button>
+          <button type="button" class="btn sm" id="toFoot">Footer</button>
+          <span class="sp"></span>
+          <span class="badge" id="pvState">Preview: current site</span>
+        </div>
+        <div class="frame-wrap" id="frameWrap"><iframe id="frame" src="index.html" title="Live preview of the new ZoneCo site"></iframe></div>
+        <p class="pv-note">This is the real new site, shown smaller. You can scroll inside it. Your logo and color changes appear here only; they are not saved anywhere until you send them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="request">
+  <div class="wrap">
+    <h2>Request a change</h2>
+    <p class="sub">Words, photos, a new news item, a bio update, a page you want gone: describe it the way you would to a web designer. Attach files if it helps. Josh gets an email.</p>
+    <form class="panel" id="reqForm" name="site-studio-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="studio.html">
+      <input type="hidden" name="form-name" value="site-studio-request">
+      <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <div class="sec">
+        <div class="request">
+          <div><label class="lbl" for="r-name">Your name</label><input type="text" id="r-name" name="name" value="Sean Suder" required></div>
+          <div><label class="lbl" for="r-email">Your email</label><input type="email" id="r-email" name="email" value="sean@ssuder.com" required></div>
+          <div><label class="lbl" for="r-page">Which page?</label><select id="r-page" name="page"></select></div>
+          <div><label class="lbl" for="r-type">What kind of change?</label>
+            <select id="r-type" name="type">
+              <option>Fix wording or a fact</option>
+              <option>Add or update a news item</option>
+              <option>Update a team bio or photo</option>
+              <option>Add or update a project</option>
+              <option>Swap a photo or image</option>
+              <option>Design or layout</option>
+              <option>Something else</option>
+            </select></div>
+          <div class="full"><label class="lbl" for="r-text">Describe the change</label>
+            <textarea id="r-text" name="request" required placeholder="Example: On the Team page, Todd's title should be Principal, not Senior Planner. Or: Add a news item: Powell adopted its new zoning code on Aug 19; photo attached; link to the LinkedIn post is https://…"></textarea></div>
+          <div><label class="lbl" for="r-file1">Attachment (optional)</label><input type="file" id="r-file1" name="attachment-1"></div>
+          <div><label class="lbl" for="r-file2">Another attachment (optional)</label><input type="file" id="r-file2" name="attachment-2"></div>
+        </div>
+        <div class="row" style="margin-top:16px">
+          <button type="submit" class="btn accent" id="reqSend">Send request</button>
+          <span class="hint" style="margin:0">Josh gets an email with everything above.</span>
+        </div>
+        <div class="msg" id="reqMsg"></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="block" id="pagesList">
+  <div class="wrap">
+    <h2>Every page on the new site</h2>
+    <p class="sub">Each opens in a new tab.</p>
+    <div class="pages" id="pageLinks"></div>
+  </div>
+</section>
+
+<footer class="bot">
+  <div class="wrap">ZoneCo Site Studio · a private review page for the new thezoneco.com · questions to Josh Bernstein</div>
+</footer>
+
+<script>
+(function(){
+  var PAGES=[["index.html","Home"],["about.html","About ZoneCo"],["services.html","Services"],["zoning-codes.html","Zoning Codes and Subdivision Ordinances"],["diagnostics.html","Zoning Diagnostics"],["sign-codes.html","Sign Codes"],["historic-preservation.html","Historic Preservation Ordinances and Guidelines"],["post-adoption.html","Post-Adoption Services"],["trainings.html","Board and Commission Trainings"],["on-call.html","On-Call Zoning Services"],["impact-mitigation.html","Impact Mitigation and Community Benefits"],["engagement.html","Engagement and Education"],["dpd.html","Development Pattern Districting"],["design-studio.html","Regulatory Design Studio"],["equitable-zoning.html","Equitable Zoning"],["coastal.html","Coastal Zoning"],["development-consulting.html","Development Consulting for Complex Projects"],["zoning-verification.html","Zoning Verification Letters"],["projects.html","Projects"],["project-boston.html","Project: Boston, MA"],["project-gaithersburg.html","Project: Gaithersburg, MD"],["project-palm-beach.html","Project: Palm Beach, FL"],["project-vienna.html","Project: Vienna, VA"],["project-danville.html","Project: Danville, VA"],["project-springfield.html","Project: Springfield, OH"],["project-portsmouth.html","Project: Portsmouth, OH"],["where-we-work.html","Where We Work"],["team.html","Team"],["sean-suder.html","Sean S. Suder"],["jocelyn-gibson.html","Jocelyn Gibson"],["todd-kinskey.html","Todd Kinskey"],["teresa-bamberger.html","Teresa Bamberger"],["michael-stein.html","Michael Stein"],["jp-burleigh.html","J.P. Burleigh"],["speaking.html","Speaking"],["news.html","News"],["resources.html","Zoning Resources"],["ohio-zoning-atlas.html","Ohio Zoning Atlas"],["ideation-center.html","ZoneCo Ideation Center"],["careers.html","Careers"],["contact.html","Contact"],["terms.html","Terms of Use"]];
+  var COLORS=[
+    ["ink","#0E0F0D","Dark","Header, footer, dark sections, and body text"],
+    ["paper","#F5F4EF","Light","Page background; text on dark areas"],
+    ["ochre","#D9A21B","Accent","Menu button, highlights, links"],
+    ["slate","#4D5F6E","Blue-gray","Secondary accent and hover states"],
+    ["sage","#B9BDA9","Green-gray","Footer headings, labels, small type"],
+    ["brick","#8E5A48","Warm accent","Used sparingly in illustrations and details"]
+  ];
+  var $=function(id){return document.getElementById(id)};
+  var frame=$('frame'), wrap=$('frameWrap');
+  var state={logoChoice:'current',logoURL:null,logoName:null,logoH:32,colors:{}};
+  COLORS.forEach(function(c){state.colors[c[0]]=c[1]});
+
+  // page picker + links
+  var pick=$('pagePick'), rp=$('r-page'), links=$('pageLinks');
+  PAGES.forEach(function(p){
+    var o=document.createElement('option');o.value=p[0];o.textContent=p[1];pick.appendChild(o);
+    var o2=document.createElement('option');o2.value=p[1]+' ('+p[0]+')';o2.textContent=p[1];rp.appendChild(o2);
+    var a=document.createElement('a');a.href=p[0];a.target='_blank';a.rel='noopener';a.innerHTML=p[1]+'<small>'+p[0]+'</small>';links.appendChild(a);
+  });
+  var oAll=document.createElement('option');oAll.value='Whole site / not sure';oAll.textContent='Whole site / not sure';rp.insertBefore(oAll,rp.firstChild);rp.selectedIndex=0;
+  pick.addEventListener('change',function(){frame.src=pick.value});
+
+  // scale the 1280px-wide frame to the container
+  function fit(){var w=wrap.clientWidth;var s=Math.min(1,w/1280);wrap.style.setProperty('--s',s)}
+  window.addEventListener('resize',fit);fit();
+
+  // apply state into the framed page
+  function doc(){try{return frame.contentDocument}catch(e){return null}}
+  function apply(){
+    var d=doc();if(!d||!d.documentElement)return;
+    var root=d.documentElement;
+    root.style.setProperty('--logo-height',state.logoH+'px');
+    Object.keys(state.colors).forEach(function(k){root.style.setProperty('--'+k,state.colors[k])});
+    var src=(state.logoChoice==='upload'&&state.logoURL)?state.logoURL:'assets/img/logo.png';
+    Array.prototype.forEach.call(d.querySelectorAll('img.logo'),function(i){if(i.getAttribute('src')!==src)i.setAttribute('src',src)});
+    var changed=state.logoChoice==='upload'&&state.logoURL||state.logoH!==32||COLORS.some(function(c){return state.colors[c[0]].toUpperCase()!==c[1]});
+    var b=$('pvState');b.textContent=changed?'Preview: with your changes':'Preview: current site';b.className='badge'+(changed?' on':'');
+  }
+  frame.addEventListener('load',apply);
+  $('toTop').addEventListener('click',function(){var d=doc();if(d)d.documentElement.scrollTop=0;if(d&&d.body)d.body.scrollTop=0});
+  $('toFoot').addEventListener('click',function(){var d=doc();if(!d)return;var f=d.querySelector('footer');if(f)f.scrollIntoView({block:'end'})});
+
+  // logo controls
+  var previewable=/\.(svg|png|jpe?g|webp)$/i;
+  $('logo-file').addEventListener('change',function(e){
+    var f=e.target.files&&e.target.files[0];
+    if(state.logoURL){URL.revokeObjectURL(state.logoURL);state.logoURL=null}
+    state.logoName=f?f.name:null;
+    if(f&&previewable.test(f.name)){state.logoURL=URL.createObjectURL(f);$('logoHint').textContent='Previewing '+f.name+'. Make sure it reads well on the dark header; if it disappears, it is probably the dark-on-light version.'}
+    else if(f){$('logoHint').textContent=f.name+' can’t be previewed in a browser (that’s normal for .ai/.eps/.pdf), but it will be sent to Josh and he’ll place it.'}
+    else{$('logoHint').textContent='The header and footer are dark, so the white version is the one that matters. Vector files (.svg, .ai, .eps, .pdf) are best. Files up to about 8 MB each.'}
+    if(f){document.querySelector('input[name=logo-choice][value=upload]').checked=true;state.logoChoice='upload'}
+    apply();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('input[name=logo-choice]'),function(r){r.addEventListener('change',function(){state.logoChoice=r.value;apply()})});
+  $('logoH').addEventListener('input',function(e){state.logoH=+e.target.value;$('logoHOut').textContent=state.logoH+' px';apply()});
+
+  // colors
+  var box=$('colors');
+  COLORS.forEach(function(c){
+    var row=document.createElement('div');row.className='color';
+    row.innerHTML='<input type="color" value="'+c[1]+'" data-k="'+c[0]+'" aria-label="'+c[2]+'"><div><div class="n">'+c[2]+'</div><div class="d">'+c[3]+'</div></div><code data-c="'+c[0]+'">'+c[1]+'</code>';
+    box.appendChild(row);
+  });
+  box.addEventListener('input',function(e){
+    var t=e.target;if(t.type!=='color')return;
+    state.colors[t.dataset.k]=t.value.toUpperCase();
+    box.querySelector('code[data-c="'+t.dataset.k+'"]').textContent=t.value.toUpperCase();
+    apply();
+  });
+  $('resetColors').addEventListener('click',function(){
+    COLORS.forEach(function(c){state.colors[c[0]]=c[1];box.querySelector('input[data-k="'+c[0]+'"]').value=c[1];box.querySelector('code[data-c="'+c[0]+'"]').textContent=c[1]});
+    apply();
+  });
+
+  // forms (Netlify Forms via fetch; falls back to normal POST if fetch is unavailable)
+  function summary(){
+    var changedColors={};COLORS.forEach(function(c){if(state.colors[c[0]].toUpperCase()!==c[1])changedColors[c[0]]={from:c[1],to:state.colors[c[0]]}});
+    return {logoChoice:state.logoChoice,logoFile:state.logoName,logoHeightPx:state.logoH,colorsChanged:changedColors,allColors:state.colors,previewPage:pick.value,sentAt:new Date().toISOString(),page:location.href};
+  }
+  function wire(form,btn,msg,afterOk){
+    form.addEventListener('submit',function(e){
+      if(!window.fetch||!window.FormData)return; // plain POST fallback
+      e.preventDefault();
+      if(form.id==='brandForm')$('settings').value=JSON.stringify(summary(),null,2);
+      var m=$(msg);m.className='msg';m.textContent='';
+      var b=$(btn);b.disabled=true;var old=b.textContent;b.textContent='Sending…';
+      var total=0;Array.prototype.forEach.call(form.querySelectorAll('input[type=file]'),function(i){if(i.files)for(var k=0;k<i.files.length;k++)total+=i.files[k].size});
+      if(total>8*1024*1024){m.className='msg err';m.textContent='Those files add up to more than 8 MB, which is more than this form can carry. Send them to Josh by email (or a Dropbox/iCloud link) and submit the rest here.';b.disabled=false;b.textContent=old;return}
+      fetch(form.getAttribute('action')||'/',{method:'POST',body:new FormData(form)}).then(function(r){
+        if(!r.ok)throw new Error('HTTP '+r.status);
+        m.className='msg ok';m.textContent=afterOk;b.textContent='Sent';
+        try{localStorage.setItem('studio-name',form.querySelector('[name=name]').value);localStorage.setItem('studio-email',form.querySelector('[name=email]').value)}catch(err){}
+      }).catch(function(){
+        m.className='msg err';m.textContent='That didn’t go through. Try once more; if it still fails, email Josh what you wanted to send.';b.disabled=false;b.textContent=old;
+      });
+    });
+  }
+  wire($('brandForm'),'brandSend','brandMsg','Sent. Josh will apply this to the site and let you know when the preview link is updated.');
+  wire($('reqForm'),'reqSend','reqMsg','Sent. Josh will make the change and let you know when it’s up.');
+  try{var n=localStorage.getItem('studio-name'),em=localStorage.getItem('studio-email');if(n){$('b-name').value=n;$('r-name').value=n}if(em){$('b-email').value=em;$('r-email').value=em}}catch(err){}
+})();
+</script>
+</body>
+</html>
