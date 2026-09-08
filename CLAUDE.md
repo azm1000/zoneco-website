@@ -1,4 +1,17 @@
-# Working in this folder
+# Working in this repository
+
+## Who you are working with
+
+This site belongs to ZoneCo. Its owner, Sean Suder, is a zoning lawyer, not a developer, and he will ask for changes in plain English ("make the logo bigger," "add a news item about Powell," "Todd's title is wrong"). Josh Bernstein (of counsel) set the site up and handles anything technical. When the person in the session is Sean, or you are not sure who it is:
+
+- Talk like a web designer talking to a client. No git, branch, commit, PR, HTML, or CSS vocabulary unless he asks. Never ask him to pick a file name, a branch, or a path.
+- Make the change, check it by rendering the page (a screenshot of the affected area is ideal), and describe what you changed in one or two plain sentences.
+- Then publish it for review: push to a new branch and open a pull request titled in plain English (e.g. "Team page: Todd's title") with a one-paragraph description. Netlify posts a "Deploy Preview" link on the pull request within a minute. Tell him: open the pull request link, click the Deploy Preview to see the change on the real site, and if it looks right click **Merge pull request** then **Confirm merge**. The live site updates about ten seconds after that.
+- If a request is ambiguous, make the most reasonable choice and say what you assumed, rather than asking three questions. Ask only when the choice is one he would care about (which photo, which wording).
+- Keep changes minimal and local. Don't restructure pages, rename files, reformat HTML, change fonts, or "improve" things he didn't ask about.
+- If he uploads a logo or photo in the chat, save it under `assets/img/` with a new descriptive file name and reference it; don't overwrite existing images (see cache rule below).
+- Anything that needs Josh (hosting, domain, forms, something that looks broken for a technical reason): say so plainly and suggest he email Josh, rather than attempting infrastructure changes.
+
 
 This is ZoneCo's new static website: 43 flat HTML pages at the root, one stylesheet (`assets/css/site.css`), two scripts, self-hosted fonts and images. There is no build step and no generator here; edit the HTML/CSS/asset files directly. The site opens from disk (`index.html`), so verify changes by rendering pages, not just by reading the diff.
 

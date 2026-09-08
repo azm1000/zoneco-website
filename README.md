@@ -2,9 +2,17 @@
 
 Static site: 43 HTML pages, one stylesheet, one script, self-hosted fonts, images, hero video, and the document library. No build step is required to deploy; upload this folder as-is. New here? Read `START HERE - Sean.md` first.
 
+## How changes get made (September 2026)
+
+The site lives in the GitHub repository `azm1000/zoneco-website`. Netlify is linked to it: every change merged to `main` is live at the preview URL about ten seconds later, and every pull request gets its own Deploy Preview link. Nobody drags folders anymore.
+
+- **Sean** opens [claude.ai/code](https://claude.ai/code), picks this repository, and describes the change in plain English. Claude makes it, opens a pull request with a preview link, and Sean clicks Merge when it looks right. Sean can also use `studio.html` on the live site to try logo/color ideas and send requests to Josh.
+- **Josh** does the same, or works from a Claude session on his Mac.
+- `CLAUDE.md` in this folder tells Claude how to behave in this repository; keep it current.
+
 ## Deploying
 
-**Netlify (recommended, easiest).** Drag this folder onto app.netlify.com. `netlify.toml` sets caching headers, `_redirects` maps every old Squarespace URL (e.g. `/aboutzoneco`, `/sean-s-suder`, `/s/*.pdf`) to its new page so inbound links and search rankings carry over, and the three forms (contact, training booking, newsletter) work automatically through Netlify Forms with no extra setup. Point the `thezoneco.com` DNS at Netlify when ready.
+**Netlify (current).** Linked to the GitHub repo; pushes to `main` deploy automatically. (Drag-and-drop of this folder onto the Netlify Deploys page also still works as a manual fallback.) `netlify.toml` sets caching headers, `_redirects` maps every old Squarespace URL (e.g. `/aboutzoneco`, `/sean-s-suder`, `/s/*.pdf`) to its new page so inbound links and search rankings carry over, and the three forms (contact, training booking, newsletter) work automatically through Netlify Forms with no extra setup. Point the `thezoneco.com` DNS at Netlify when ready.
 
 **Any other host (Cloudflare Pages, GitHub Pages, S3, a traditional web host).** Upload the folder. Recreate the redirects in `_redirects` using that host's redirect mechanism, and change the three `<form>` tags to post to a form service such as Formspree (replace `data-netlify="true"` with an `action` URL) or to your own handler.
 
