@@ -31,37 +31,36 @@
 })();
 
 (function(){
-  // Hero video rotation (home only). Crossfades between two players.
-  const v0=document.getElementById('v0'),v1=document.getElementById('v1');
-  if(!v0||!v1) return;
-  const clips=[
-    {src:'assets/video/hero-1.mp4',poster:'assets/img/hero-1-poster.jpg',credit:'Street with people walking at dusk'},
-    {src:'assets/video/hero-2.mp4',poster:'assets/img/hero-2-poster.jpg',credit:'People walking on a busy city street'},
-    {src:'assets/video/hero-3.mp4',poster:'assets/img/hero-3-poster.jpg',credit:'People walking slowly across town'}
+  // Home hero: slow drifting pan across ZoneCo project towns. Crossfades two layers.
+  const p0=document.getElementById('p0'),p1=document.getElementById('p1');
+  if(!p0||!p1) return;
+  const shots=[
+    {src:'assets/img/hp-findlay.jpg',pos:'50% 72%',credit:'Over-the-Rhine, Cincinnati, Ohio'},
+    {src:'assets/img/sign-marysville.jpg',pos:'50% 55%',credit:'Marysville, Ohio'},
+    {src:'assets/img/proj-gaithersburg.jpg',pos:'50% 62%',credit:'Gaithersburg, Maryland'},
+    {src:'assets/img/proj-springfield.jpg',pos:'50% 50%',credit:'Springfield, Ohio'}
   ];
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const v=[v0,v1],still=document.getElementById('still'),credit=document.getElementById('vid-credit');
-  let i=0,active=0,timer=null,playing=false;
-  function showStill(clip){still.style.backgroundImage='url('+clip.poster+')';still.classList.add('on');}
-  function load(el,clip){
-    el.muted=true;el.defaultMuted=true;el.setAttribute('muted','');el.playsInline=true;
-    el.poster=clip.poster;el.src=clip.src;el.load();
-    const p=el.play();return p?p:Promise.resolve();
+  const pans=[p0,p1],credit=document.getElementById('vid-credit');
+  let i=0,active=0;
+  function paint(el,n){
+    const shot=shots[n];
+    el.style.backgroundImage='url('+shot.src+')';
+    el.style.backgroundPosition=shot.pos;
+    el.classList.remove('kb-a','kb-b');
+    if(!reduce){void el.offsetWidth;el.classList.add(n%2?'kb-b':'kb-a');}
+    if(credit) credit.textContent=shot.credit;
   }
-  if(reduce){showStill(clips[0]);const a=document.getElementById('anim');if(a)a.style.display='none';}
-  if(credit) credit.textContent='Video: Mixkit, '+clips[0].credit;
+  shots.forEach(s=>{const im=new Image();im.src=s.src;});
+  paint(pans[0],0);pans[0].classList.add('on');
   if(reduce) return;
-  function rotate(){
-    i=(i+1)%clips.length; const nxt=1-active;
-    load(v[nxt],clips[i]).then(()=>{v[nxt].classList.add('on');v[active].classList.remove('on');active=nxt;if(credit)credit.textContent='Video: Mixkit, '+clips[i].credit;}).catch(()=>{});
-  }
-  function start(){
-    if(playing) return;
-    load(v[0],clips[0]).then(()=>{playing=true;v[0].classList.add('on');still.classList.remove('on');timer=setInterval(rotate,9000);}).catch(()=>{});
-  }
-  start();
-  ['touchstart','click','scroll'].forEach(ev=>addEventListener(ev,start,{once:true,passive:true}));
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)start();});
+  setInterval(function(){
+    i=(i+1)%shots.length;
+    const nxt=1-active;
+    paint(pans[nxt],i);
+    pans[nxt].classList.add('on');pans[active].classList.remove('on');
+    active=nxt;
+  },9000);
 })();
 
 (function(){
