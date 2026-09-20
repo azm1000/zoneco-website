@@ -31,39 +31,6 @@
 })();
 
 (function(){
-  // Home hero: slow drifting pan across ZoneCo project towns. Crossfades two layers.
-  const p0=document.getElementById('p0'),p1=document.getElementById('p1');
-  if(!p0||!p1) return;
-  const shots=[
-    {src:'assets/img/hp-findlay.jpg',pos:'50% 72%',credit:'Over-the-Rhine, Cincinnati, Ohio'},
-    {src:'assets/img/sign-marysville.jpg',pos:'50% 55%',credit:'Marysville, Ohio'},
-    {src:'assets/img/proj-gaithersburg.jpg',pos:'50% 62%',credit:'Gaithersburg, Maryland'},
-    {src:'assets/img/proj-springfield.jpg',pos:'50% 50%',credit:'Springfield, Ohio'}
-  ];
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const pans=[p0,p1],credit=document.getElementById('vid-credit');
-  let i=0,active=0;
-  function paint(el,n){
-    const shot=shots[n];
-    el.style.backgroundImage='url('+shot.src+')';
-    el.style.backgroundPosition=shot.pos;
-    el.classList.remove('kb-a','kb-b');
-    if(!reduce){void el.offsetWidth;el.classList.add(n%2?'kb-b':'kb-a');}
-    if(credit) credit.textContent=shot.credit;
-  }
-  shots.forEach(s=>{const im=new Image();im.src=s.src;});
-  paint(pans[0],0);pans[0].classList.add('on');
-  if(reduce) return;
-  setInterval(function(){
-    i=(i+1)%shots.length;
-    const nxt=1-active;
-    paint(pans[nxt],i);
-    pans[nxt].classList.add('on');pans[active].classList.remove('on');
-    active=nxt;
-  },9000);
-})();
-
-(function(){
   // Count-up on stats
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const nodes=document.querySelectorAll('[data-count]');

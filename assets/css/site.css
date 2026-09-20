@@ -140,16 +140,11 @@
   .anim{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
   .still{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s;filter:saturate(.85)}
   .still.on{opacity:1}
-  .pan{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.6s ease;filter:saturate(.85);will-change:transform,opacity}
+  .pan{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;filter:saturate(.85)}
   .pan.on{opacity:1}
-  .pan.kb-a{animation:kb-a 12s ease-out both}
-  .pan.kb-b{animation:kb-b 12s ease-out both}
-  @keyframes kb-a{from{transform:scale(1.04)}to{transform:scale(1.15) translate(-1.6%,-1.2%)}}
-  @keyframes kb-b{from{transform:scale(1.15) translate(1.4%,1%)}to{transform:scale(1.04)}}
-  @media (prefers-reduced-motion: reduce){.pan{animation:none;transform:none}}
   .vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.6s ease;filter:saturate(.85)}
   .vid video.on{opacity:1}
-  .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,13,.55) 0%,rgba(14,15,13,.25) 40%,rgba(14,15,13,.85) 100%)}
+  .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,13,.78) 0%,rgba(14,15,13,.62) 40%,rgba(14,15,13,.92) 100%)}
   .hero-in{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1fr}
   .hero h1 .ln{display:block;white-space:nowrap}
   .hero h1{font-size:clamp(40px,6vw,92px);max-width:16ch}

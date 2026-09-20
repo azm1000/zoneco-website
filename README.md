@@ -22,7 +22,7 @@ The document library (`assets/docs/`, 21 PDFs the old site hosted) is included, 
 
 - `index.html` and the other page files sit at the root; every link is relative, so the site also opens directly from disk.
 - `assets/css/site.css` is the whole design system (from the v7 mockup, plus inner-page components). Brand colors are CSS variables in the `:root` block near the top.
-- `assets/js/site.js` handles the header, overlay menu, hero photo rotation, map tooltips, count-ups, the portfolio search, and the news filters. `assets/js/map.js` is the zoomable map.
+- `assets/js/site.js` handles the header, overlay menu, map tooltips, count-ups, the portfolio search, and the news filters. `assets/js/map.js` is the zoomable map.
 - `assets/img/` photos (team, projects, code pages, LinkedIn post images under `news/`), `assets/video/` the retired hero clips (no longer referenced), `assets/fonts/` Libre Franklin, `assets/docs/` every PDF the old site hosted.
 - `brand-source/` raw logo files: what was pulled from thezoneco.com on 9/8/2026, plus anything ZoneCo adds (original vector logos, brand guide).
 - `sitemap.xml` and `robots.txt` are generated.
@@ -74,11 +74,14 @@ The Python generator that originally produced these files (`src/`, with `news_da
 
 ## Known follow-ups
 
-- The home hero is a slow drifting pan (CSS Ken Burns) across four ZoneCo project towns: Over-the-Rhine
-  (Cincinnati), Marysville OH, Gaithersburg MD, and Springfield OH. The photo list, focal points, and
-  caption for each frame are at the top of the hero block in `assets/js/site.js`; the motion is the
-  `.pan` / `kb-a` / `kb-b` rules in `site.css`. It honors `prefers-reduced-motion` and the first frame is
-  inlined on `#p0` so the hero still shows with JavaScript off. The old Mixkit clips in `assets/video/`
-  are no longer referenced; swap in ZoneCo footage when available.
+- The home hero is one still photograph: `assets/img/southold.jpg` (Southold, New York), set inline on
+  the `.pan` div in `index.html`, with the caption in the `.vid-credit` div just below it. To change the
+  photo, edit those two places; nothing else is involved. The `.shade` gradient in `site.css` sits over
+  it and is deliberately heavy (.78/.62/.92) so the headline reads and the photo works as texture rather
+  than subject. There is no hero JavaScript and no motion.
+- Earlier versions rotated three Mixkit stock clips (`assets/video/`, still on disk, no longer
+  referenced) and then four project-town photos with a CSS pan. Both were dropped: the stock footage was
+  not American, and the rotating photos were project thumbnails rather than pictures composed to sit
+  behind a headline. If ZoneCo footage or photos shot for the hero turn up, they belong here.
 - Dates on LinkedIn-sourced news items are month-level.
 - Logo swapped 9/8/2026 to the ZONECO ++++ wordmark (`assets/img/logo.png`, from the web version on thezoneco.com; favicon is the four plus signs). Replace `logo.png` with a vector export when ZoneCo supplies the original files (then rename references back to `.svg` or keep `.png`).
