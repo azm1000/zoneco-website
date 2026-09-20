@@ -241,7 +241,7 @@
   .legend .k1{background:var(--ochre);border-radius:50%}
   .legend .k2{background:#33403F;border:1px solid var(--line-dark)}
   .regions{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);margin-top:clamp(40px,5vw,72px)}
-  .regions div{background:var(--ink);padding:18px 20px}
+  .regions div,.regions a{background:var(--ink);padding:18px 20px}
   .regions b{display:block;font-weight:500;font-size:15px}
   .regions span{display:block;font-size:13px;color:var(--sage);margin-top:4px}
   .card .img{background-size:cover;background-position:center}
@@ -584,7 +584,7 @@ a.card:hover{box-shadow:0 8px 30px rgba(14,15,13,.08)}
 
 /* Regions row */
 .regions.light{background:var(--line);border-color:var(--line)}
-.regions.light div{background:var(--paper)}
+.regions.light div,.regions.light a{background:var(--paper)}
 .regions.light span{color:var(--mute)}
 .regions a{display:block}
 .regions a:hover b{color:var(--slate)}

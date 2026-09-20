@@ -1,13 +1,18 @@
 /* ZoneCo project map: zoom, pan, labels at depth, and cluster tooltips.
    Works on every element with class "map-wrap" containing an .usmap svg. */
 (function(){
+  /* These must match the region list under the map (see the .regions block in
+     index.html and where-we-work.html). The three Ohio regions there -- Midwest,
+     Central Ohio, and Northeast Ohio and Western Pennsylvania -- are all inside
+     one state, which the map cannot tell apart by state, so they share one
+     button covering Ohio and the states grouped with it. */
   const REGIONS={
-    'Ohio':['Ohio'],
-    'Mid-Atlantic':['Maryland','Virginia','Pennsylvania'],
-    'Northeast':['New York','Connecticut','Massachusetts','Vermont'],
-    'Upper Midwest':['Illinois','Michigan','Minnesota','Wisconsin','Indiana','Missouri'],
-    'South':['Alabama','Georgia','Florida','Mississippi','Tennessee','South Carolina','Kentucky'],
-    'West':['Colorado','Montana','Oklahoma']
+    'Ohio and neighbors':['Ohio','Kentucky','Indiana','Pennsylvania'],
+    'Upper Midwest':['Illinois','Michigan','Minnesota','Wisconsin'],
+    'National Capital Region':['Maryland','Virginia'],
+    'New York and New England':['New York','Connecticut','Massachusetts','Vermont'],
+    'South':['Alabama','Georgia','Florida','Mississippi','Tennessee','South Carolina'],
+    'West':['Colorado','Missouri','Montana','Oklahoma']
   };
   document.querySelectorAll('.map-wrap').forEach(init);
 
