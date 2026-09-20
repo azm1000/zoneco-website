@@ -64,7 +64,7 @@ All colors are CSS variables at the top of `assets/css/site.css`:
 | `--brick` | #8E5A48 | mixed-use lots in the mark |
 | `--mute` | #6B6E66 | secondary text |
 
-Changing a value there changes it site-wide. The `.plat .lot.*` rules further down color the plat illustration on the home page and are unrelated to the logo. The typeface is Libre Franklin (self-hosted in `assets/fonts/`, declared in the `@font-face` blocks at the top of the stylesheet); to change it, add the new font files there and update `font-family` on `body`.
+Changing a value there changes it site-wide. The `.plat .lot.*` rules further down color the plat illustration on the contact page and are unrelated to the logo. The typeface is Libre Franklin (self-hosted in `assets/fonts/`, declared in the `@font-face` blocks at the top of the stylesheet); to change it, add the new font files there and update `font-family` on `body`.
 
 ## Editing content
 
