@@ -12,7 +12,7 @@
     'National Capital Region':['Maryland','Virginia'],
     'New York and New England':['New York','Connecticut','Massachusetts','Vermont'],
     'South':['Alabama','Georgia','Florida','Mississippi','Tennessee','South Carolina'],
-    'West':['Colorado','Missouri','Montana','Oklahoma']
+    'West':['Colorado','Missouri','Montana']
   };
   document.querySelectorAll('.map-wrap').forEach(init);
 
