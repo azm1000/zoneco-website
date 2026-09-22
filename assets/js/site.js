@@ -57,7 +57,7 @@
   }
   function start(){
     if(playing) return;
-    load(v[0],clips[0]).then(()=>{playing=true;v[0].classList.add('on');still.classList.remove('on');timer=setInterval(rotate,9000);}).catch(()=>{});
+    load(v[0],clips[0]).then(()=>{playing=true;v[0].classList.add('on');still.classList.remove('on');timer=setInterval(rotate,4000);}).catch(()=>{});
   }
   start();
   ['touchstart','click','scroll'].forEach(ev=>addEventListener(ev,start,{once:true,passive:true}));
