@@ -58,7 +58,7 @@
     pans[nxt].classList.add('on');
     pans[active].classList.remove('on');
     active=nxt;
-  },9000);
+  },4000);
 })();
 
 (function(){
