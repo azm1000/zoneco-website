@@ -31,6 +31,37 @@
 })();
 
 (function(){
+  // Home hero: crossfades between ZoneCo project towns. One still at a time,
+  // no movement -- the shade over it is heavy so the headline carries the page.
+  var p0=document.getElementById('p0'), p1=document.getElementById('p1');
+  if(!p0||!p1) return;
+  var shots=[
+    {src:'assets/img/southold.jpg',         pos:'50% 55%', credit:'Southold, New York'},
+    {src:'assets/img/proj-springfield.jpg', pos:'50% 50%', credit:'Springfield, Ohio'},
+    {src:'assets/img/proj-palmbeach-2.jpg', pos:'50% 55%', credit:'Palm Beach, Florida'},
+    {src:'assets/img/proj-danville-2.jpg',  pos:'50% 58%', credit:'Danville, Virginia'}
+  ];
+  var credit=document.getElementById('vid-credit');
+  var pans=[p0,p1], i=0, active=0;
+  function paint(el,n){
+    el.style.backgroundImage='url('+shots[n].src+')';
+    el.style.backgroundPosition=shots[n].pos;
+    if(credit) credit.textContent=shots[n].credit;
+  }
+  shots.forEach(function(s){ var im=new Image(); im.src=s.src; });
+  paint(pans[0],0); pans[0].classList.add('on');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function(){
+    i=(i+1)%shots.length;
+    var nxt=1-active;
+    paint(pans[nxt],i);
+    pans[nxt].classList.add('on');
+    pans[active].classList.remove('on');
+    active=nxt;
+  },9000);
+})();
+
+(function(){
   // Count-up on stats
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const nodes=document.querySelectorAll('[data-count]');
