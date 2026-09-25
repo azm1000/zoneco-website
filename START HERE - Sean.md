@@ -12,7 +12,7 @@ Use the **Claude desktop app** (not the chat window in a browser), because the d
 
 ## Changing the logo (the quick way, 5 minutes)
 
-The logo appears in the header and footer of every page, but it is one file: `assets/img/logo.png`. Change that file and all 45 pages change. (As of 9/8 it already carries the ZONECO wordmark from thezoneco.com; the steps below are for replacing it with your original artwork.)
+The logo appears in the header and footer of every page, but it is one file: `assets/img/logo.png`. Change that file and all 44 pages change. (As of 9/8 it already carries the ZONECO wordmark from thezoneco.com; the steps below are for replacing it with your original artwork.)
 
 1. Unzip this folder somewhere easy to find (your Desktop is fine). Keep the folder name simple, e.g. `ZoneCo Website`.
 2. Open the Claude desktop app, start a new Cowork task, and click **Add folder**. Choose the `ZoneCo Website` folder.
