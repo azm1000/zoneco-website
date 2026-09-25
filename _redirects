@@ -55,3 +55,6 @@
 /contact-us          /contact.html          301
 /terms-of-use        /terms.html            301
 /s/*                 /assets/docs/:splat   301
+
+# Retired page (live briefly Sept 2026) -> existing engagement page
+/land-use-engagement.html /engagement.html 301

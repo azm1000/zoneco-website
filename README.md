@@ -1,6 +1,6 @@
 # ZoneCo website (v1 build, September 2, 2026; logo made swappable September 8, 2026)
 
-Static site: 45 HTML pages, one stylesheet, one script, self-hosted fonts, images, and the document library. No build step is required to deploy; upload this folder as-is. New here? Read `START HERE - Sean.md` first.
+Static site: 44 HTML pages, one stylesheet, one script, self-hosted fonts, images, and the document library. No build step is required to deploy; upload this folder as-is. New here? Read `START HERE - Sean.md` first.
 
 ## How changes get made (September 2026)
 
@@ -39,7 +39,7 @@ The logo is a single file, `assets/img/logo.png`, referenced from every page as
 To change the logo everywhere, replace that file. Rules that keep it looking right:
 
 1. **Dark backgrounds only.** The header sits over a dark gradient (and turns solid dark when the page scrolls) and the footer is solid `--ink` (#0E0F0D). Use the reversed / white version of the logo. A standard dark-on-light version will disappear.
-2. **Format.** SVG is best (sharp at every size): name it `logo.svg`, put it in `assets/img/`, and change `logo.png` to `logo.svg` in the two lines above on all 45 pages (a find-and-replace across `*.html`). A large PNG with a transparent background is what is there now. Do not use JPG (no transparency).
+2. **Format.** SVG is best (sharp at every size): name it `logo.svg`, put it in `assets/img/`, and change `logo.png` to `logo.svg` in the two lines above on all 44 pages (a find-and-replace across `*.html`). A large PNG with a transparent background is what is there now. Do not use JPG (no transparency).
 3. **Size.** The logo is rendered at a fixed height set by `--logo-height` in `assets/css/site.css` (default 32px; width scales automatically). A wide wordmark with a tagline under it becomes unreadable at 32px, so either use a version without the tagline in the header or raise `--logo-height` (40px is the most the 72px-tall header comfortably takes). Trim empty margins from the image first; extra transparent padding makes the logo look smaller than it is.
 4. **Browser-tab icon.** `assets/img/favicon.svg` is the tab icon, referenced from every page's `<head>`. Make a square version of the new mark (e.g. the four plus signs on a dark square) and replace that file too.
 5. **Check** `index.html`, `about.html`, and `contact.html` in a browser after the swap, top and bottom of each page.
@@ -48,7 +48,7 @@ The current logo file is `assets/img/logo.png` (the ZONECO ++++ wordmark, white,
 
 ## Changing colors and fonts
 
-**Cache note:** `netlify.toml` tells browsers to cache everything under `assets/` for a year. After any change to `site.css`, `site.js`, or `map.js`, bump the `?v=` query string on their `<link>`/`<script>` tags in all 45 pages (currently `?v=20260908`), or visitors keep the old file. Images with new content should get new file names for the same reason.
+**Cache note:** `netlify.toml` tells browsers to cache everything under `assets/` for a year. After any change to `site.css`, `site.js`, or `map.js`, bump the `?v=` query string on their `<link>`/`<script>` tags in all 44 pages (currently `?v=20260908`), or visitors keep the old file. Images with new content should get new file names for the same reason.
 
 All colors are CSS variables at the top of `assets/css/site.css`:
 
@@ -68,7 +68,7 @@ Changing a value there changes it site-wide. The `.plat .lot.*` rules further do
 
 ## Editing content
 
-Each page is a plain HTML file. The header and footer are repeated verbatim in every file, so a change to either must be applied to all 45 pages (search-and-replace). Team bios, case studies, and service pages are self-contained. The where-we-work portfolio list and the news feed are embedded in `where-we-work.html` and `news.html`.
+Each page is a plain HTML file. The header and footer are repeated verbatim in every file, so a change to either must be applied to all 44 pages (search-and-replace). Team bios, case studies, and service pages are self-contained. The where-we-work portfolio list and the news feed are embedded in `where-we-work.html` and `news.html`.
 
 The Python generator that originally produced these files (`src/`, with `news_data.py` and `portfolio_data.py`) is not in this folder; edit the HTML directly.
 
