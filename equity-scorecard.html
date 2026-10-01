@@ -112,7 +112,7 @@
       <div><label for="s-org">Organization</label><input id="s-org" name="organization" autocomplete="organization"></div>
       <div><label for="s-juris">Jurisdiction *</label><input id="s-juris" name="jurisdiction" placeholder="e.g. City of Dayton" required></div>
       <div><label for="s-state">State *</label><input id="s-state" name="state" autocomplete="address-level1" required></div>
-      <div class="full"><label for="s-file">Zoning code (PDF, up to 8 MB)</label><input id="s-file" name="code_pdf" type="file" accept="application/pdf,.pdf"><small id="s-file-note" class="muted" style="display:block;margin-top:6px;font-size:12px">Larger file, or code published online? Paste a link below instead.</small></div>
+      <div class="full"><label for="s-file">Zoning code (PDF, up to 7.5 MB)</label><input id="s-file" name="code_pdf" type="file" accept="application/pdf,.pdf"><small id="s-file-note" class="muted" style="display:block;margin-top:6px;font-size:12px">Larger file, or code published online? Paste a link below instead.</small></div>
       <div class="full"><label for="s-link">Or a link to the code online</label><input id="s-link" name="code_link" type="url" placeholder="https://"></div>
       <div class="full"><label for="s-notes">Anything we should know (amendments not in the document, zones to focus on)</label><textarea id="s-notes" name="notes" style="min-height:90px"></textarea></div>
       <div class="full" style="display:flex;gap:10px;align-items:flex-start"><input id="s-consent" name="consent" type="checkbox" value="yes" required style="width:auto;margin-top:3px"><label for="s-consent" style="margin:0;font-size:13px;color:var(--ink)">I agree to receive my results and occasional news from ZoneCo by email, and to the <a href="terms.html" style="border-bottom:1px solid var(--ochre)">terms of use</a>. *</label></div>
@@ -151,10 +151,10 @@
 (function(){
   var f=document.getElementById('scorecard-form'), file=document.getElementById('s-file'),
       link=document.getElementById('s-link'), note=document.getElementById('s-file-note'),
-      status=document.getElementById('s-status'), MAX=8*1024*1024;
+      status=document.getElementById('s-status'), MAX=7.5*1024*1024;
   file.addEventListener('change',function(){
     var x=file.files[0];
-    if(x && x.size>MAX){ file.value=''; note.textContent='That file is over 8 MB. Please paste a link to the code online instead, or email it to ssuder@thezoneco.com.'; note.style.color='var(--pink-text)'; }
+    if(x && x.size>MAX){ file.value=''; note.textContent='That file is over 7.5 MB. Please paste a link to the code online instead, or email it to ssuder@thezoneco.com.'; note.style.color='var(--pink-text)'; }
   });
   f.addEventListener('submit',function(e){
     if(!file.files.length && !link.value){ e.preventDefault(); note.textContent='Please upload the code as a PDF or paste a link to it.'; note.style.color='var(--pink-text)'; file.focus(); return; }
