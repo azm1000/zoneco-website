@@ -27,11 +27,11 @@ Read `README.md` before making changes; it documents the logo mechanism, the col
 
 ## Site-wide edits
 
-Header and footer markup is duplicated verbatim in all 44 site pages (every `*.html` except `studio.html`, a standalone tool page). Any change to them must be applied to every file with a script, and the count of replacements should equal 44 (or 88 for elements that appear in both header and footer). Assert that before saving.
+Header and footer markup is duplicated verbatim in all 44 site pages (every `*.html` except `studio.html`, a standalone tool page, and `scorecard-report-sample.html`, the standalone Equitable Zoning Scorecard results-page sample). Any change to them must be applied to every file with a script, and the count of replacements should equal 44 (or 88 for elements that appear in both header and footer). Assert that before saving.
 
 ## Cache busting
 
-Assets are served with a one-year immutable cache (netlify.toml). After editing `assets/css/site.css`, `assets/js/site.js`, or `assets/js/map.js`, change the `?v=` value on their tags in every page (scripted replace across `*.html`, assert 44). Give changed images new file names rather than overwriting.
+Assets are served with a one-year immutable cache (netlify.toml). After editing `assets/css/site.css`, `assets/js/site.js`, or `assets/js/map.js`, change the `?v=` value on their tags in every page (scripted replace across `*.html`, assert 44, plus the stylesheet tag in `scorecard-report-sample.html`). Give changed images new file names rather than overwriting.
 
 ## Do not
 
