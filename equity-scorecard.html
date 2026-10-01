@@ -90,7 +90,7 @@
       </div>
       <div>
         <h3>You get a report</h3>
-        <p>We email you a link to your results: an overall score, the biggest opportunities for improvement, and a finding for every category with the section of your code it is based on.</p>
+        <p>We email you your results as a PDF, usually within five business days: an overall score, the biggest opportunities for improvement, and a finding for every category with the section of your code it is based on.</p>
       </div>
     </div>
   </div>
@@ -116,7 +116,7 @@
       <div class="full"><label for="s-link">Or a link to the code online</label><input id="s-link" name="code_link" type="url" placeholder="https://"></div>
       <div class="full"><label for="s-notes">Anything we should know (amendments not in the document, zones to focus on)</label><textarea id="s-notes" name="notes" style="min-height:90px"></textarea></div>
       <div class="full" style="display:flex;gap:10px;align-items:flex-start"><input id="s-consent" name="consent" type="checkbox" value="yes" required style="width:auto;margin-top:3px"><label for="s-consent" style="margin:0;font-size:13px;color:var(--ink)">I agree to receive my results and occasional news from ZoneCo by email, and to the <a href="terms.html" style="border-bottom:1px solid var(--ochre)">terms of use</a>. *</label></div>
-      <div class="actions"><button class="btn fill" type="submit">Send my code</button><small id="s-status">The scorecard is a preliminary, automated assessment and is not legal advice.</small></div>
+      <div class="actions"><button class="btn fill" type="submit">Send my code</button><small id="s-status">The scorecard is a preliminary assessment and is not legal advice.</small></div>
     </form>
   </div>
 </section>
@@ -140,7 +140,7 @@
       <dl class="facts">
         <dt>Cost</dt><dd>Free</dd>
         <dt>What you need</dt><dd>Your zoning code, as a PDF or a link</dd>
-        <dt>What you get</dt><dd>An emailed link to your results, which you can print or save as a PDF</dd>
+        <dt>What you get</dt><dd>Your results by email, as a PDF, usually within five business days</dd>
         <dt>Related</dt><dd><a href="scorecard-report-sample.html">Sample report</a><br><a href="equitable-zoning.html">Equitable zoning</a><br><a href="diagnostics.html">Zoning diagnostics</a></dd>
       </dl>
     </aside>
@@ -163,7 +163,7 @@
     var btn=f.querySelector('button[type=submit]'); btn.disabled=true; status.textContent='Sending\u2026';
     fetch('/',{method:'POST',body:new FormData(f)}).then(function(r){
       if(!r.ok) throw new Error(r.status);
-      f.outerHTML='<div class="form-done"><h3 style="font-size:28px;margin-bottom:12px">Thank you. Your code is on its way.</h3><p class="muted">We\u2019ll email your scorecard to the address you gave us. If you don\u2019t see it, check your spam folder or call (513) 235-3470.</p></div>';
+      f.outerHTML='<div class="form-done"><h3 style="font-size:28px;margin-bottom:12px">Thank you. Your code is on its way.</h3><p class="muted">We\u2019ll email your scorecard to the address you gave us, usually within five business days. If you don\u2019t see it, check your spam folder or call (513) 235-3470.</p></div>';
     }).catch(function(){ btn.disabled=false; status.textContent='Something went wrong sending the form. Please try again, or email your code to ssuder@thezoneco.com.'; status.style.color='var(--pink-text)'; });
   });
 })();

@@ -185,7 +185,7 @@
     </div>
     <div>
       <h2>What this report is, and is not</h2>
-      <p>This is a preliminary, automated assessment of the document you provided, using ZoneCo's Equitable Zoning Scorecard. It does not account for how much of the community's land is mapped in each zone, amendments not included in the document, or how the code is administered in practice.</p>
+      <p>This is a preliminary assessment of the document you provided, using ZoneCo's Equitable Zoning Scorecard. It does not account for how much of the community's land is mapped in each zone, amendments not included in the document, or how the code is administered in practice.</p>
       <p>It is educational and is not legal advice. See our <a href="terms.html" style="border-bottom:1px solid var(--ochre)">terms of use</a>.</p>
     </div>
   </div>
@@ -270,7 +270,7 @@ var REPORT = {
   function sum(a){return a.reduce(function(s,x){return s+x},0)}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 
-  if(!R.sample) $("sample-flag").remove();
+  if(R.banner) $("sample-flag").textContent = R.banner; else if(!R.sample) $("sample-flag").remove();
   var catPts = function(c){return sum(c.lines.map(function(l){return l.pts}))};
   var core = sum(R.categories.filter(function(c){return c.group==="core"}).map(catPts));
   var bonus = sum(R.categories.filter(function(c){return c.group==="bonus"}).map(catPts));

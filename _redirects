@@ -58,3 +58,6 @@
 
 # Retired page (live briefly Sept 2026) -> existing engagement page
 /land-use-engagement.html /engagement.html 301
+
+# Internal working files: never serve
+/.claude/*  /index.html  404!
