@@ -161,6 +161,69 @@
   </div>
 </section>
 
+<section class="band" id="spread">
+<style>
+#spread .sp-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:28px}
+#spread .sp-head p{color:#3a3c37;max-width:60ch}
+#spread-fig{position:relative;background:#fff;border:1px solid var(--line);padding:clamp(16px,2.5vw,32px)}
+#spread .sp-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px}
+#spread .sp-year{font-size:clamp(48px,6vw,80px);font-weight:500;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+#spread .sp-count{font-size:16px;color:#3a3c37}
+#spread .sp-count b{color:var(--ink);font-weight:600}
+#spread .sp-note{min-height:1.5em;margin-top:8px;font-size:17px;color:var(--ink)}
+#spread svg.sp-map{display:block;width:100%;max-width:820px;height:auto;margin:12px auto 0}
+#spread .sp-st{stroke:#fff;stroke-width:.8}
+#spread .sp-st:hover{stroke:var(--ink);stroke-width:1.5}
+#spread .sp-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--mute);margin-top:8px}
+#spread .sp-legend span{display:inline-flex;align-items:center;gap:6px}
+#spread .sp-legend i{width:14px;height:14px;border-radius:2px;display:inline-block;box-shadow:inset 0 0 0 1px rgba(14,15,13,.12)}
+#spread .sp-legend .sp-legend-t{color:var(--ink);font-weight:500}
+#spread .sp-ctrl{display:flex;align-items:center;gap:16px;margin-top:20px}
+#spread .sp-play{font:inherit;font-size:14px;font-weight:500;padding:10px 18px;min-width:96px;background:var(--ink);color:var(--paper);border:0;cursor:pointer}
+#spread .sp-play:hover{background:var(--blue)}
+#spread .sp-range{flex:1;accent-color:var(--blue);min-height:44px}
+#spread .sp-bars-t{font-size:13px;color:var(--mute);margin:24px auto 0;max-width:820px}
+#spread svg.sp-bars{display:block;width:100%;max-width:820px;height:auto;margin:6px auto 0}
+#spread .sp-bar{fill:#D9D6CC}
+#spread .sp-bar.on{fill:#4F88B8}
+#spread .sp-bar.now{fill:#0B3A63}
+#spread .sp-grid line{stroke:rgba(14,15,13,.08)}
+#spread .sp-axis text{font-size:11px;fill:var(--mute)}
+#spread .sp-tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-size:13px;line-height:1.4;padding:8px 10px;max-width:240px;z-index:2}
+#spread .sp-tip b{display:block;font-weight:600}
+#spread details{margin-top:20px;font-size:14px}
+#spread summary{cursor:pointer;font-weight:500}
+#spread table{border-collapse:collapse;margin-top:10px;width:100%;max-width:520px}
+#spread th,#spread td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+#spread .num{text-align:right;font-variant-numeric:tabular-nums}
+#spread .sp-src{font-size:13px;color:var(--mute);margin-top:16px}
+@media (max-width:760px){#spread .sp-head{grid-template-columns:1fr}}
+</style>
+  <div class="wrap">
+    <div class="sp-head">
+      <div>
+        <p class="label">Interactive map</p>
+        <h2>How zoning spread, 1904 to 1932</h2>
+      </div>
+      <p>New York City adopted the first comprehensive zoning ordinance in 1916. By the start of 1933, 1,236 cities, villages, and towns in all 48 states had followed. Press play, drag the slider, or hover over (or tap) a state to see how the template traveled.</p>
+    </div>
+    <figure id="spread-fig">
+      <div class="sp-top"><span class="sp-year" aria-live="polite">1932</span><span class="sp-count"></span></div>
+      <p class="sp-note"></p>
+      <svg class="sp-map" viewBox="0 0 960 600" role="img" aria-label="Map of the United States shaded by the number of municipalities with zoning ordinances, by year, 1904 to 1932. The same figures are in the table below."></svg>
+      <div class="sp-legend"></div>
+      <div class="sp-ctrl"><button class="sp-play" type="button" aria-pressed="false">Play</button><input class="sp-range" type="range" min="0" max="20" step="1" value="20" aria-label="Year"></div>
+      <p class="sp-bars-t">Municipalities adopting zoning, by year</p>
+      <svg class="sp-bars" role="img" aria-label="Bar chart of municipalities adopting zoning each year, peaking at 140 in 1929."></svg>
+      <div class="sp-tip" hidden></div>
+      <details><summary>See the numbers by state</summary>
+        <table><thead><tr><th>State</th><th class="num">Zoned by 1933</th><th class="num">First ordinance</th></tr></thead><tbody><tr><td>New York</td><td class="num">215</td><td class="num">1916</td></tr><tr><td>New Jersey</td><td class="num">152</td><td class="num">1919</td></tr><tr><td>California</td><td class="num">113</td><td class="num">1909</td></tr><tr><td>Illinois</td><td class="num">93</td><td class="num">1921</td></tr><tr><td>Ohio</td><td class="num">86</td><td class="num">1919</td></tr><tr><td>Pennsylvania</td><td class="num">81</td><td class="num">1923</td></tr><tr><td>Massachusetts</td><td class="num">74</td><td class="num">1904</td></tr><tr><td>Michigan</td><td class="num">53</td><td class="num">1922</td></tr><tr><td>Wisconsin</td><td class="num">44</td><td class="num">1915</td></tr><tr><td>Kansas</td><td class="num">32</td><td class="num">1921</td></tr><tr><td>Connecticut</td><td class="num">29</td><td class="num">1924</td></tr><tr><td>Indiana</td><td class="num">23</td><td class="num">1922</td></tr><tr><td>Iowa</td><td class="num">22</td><td class="num">1924</td></tr><tr><td>Missouri</td><td class="num">16</td><td class="num">1922</td></tr><tr><td>Minnesota</td><td class="num">14</td><td class="num">1922</td></tr><tr><td>Oklahoma</td><td class="num">14</td><td class="num">1923</td></tr><tr><td>Florida</td><td class="num">13</td><td class="num">1923</td></tr><tr><td>North Carolina</td><td class="num">13</td><td class="num">1923</td></tr><tr><td>Texas</td><td class="num">13</td><td class="num">1928</td></tr><tr><td>Rhode Island</td><td class="num">12</td><td class="num">1922</td></tr><tr><td>Virginia</td><td class="num">12</td><td class="num">1922</td></tr><tr><td>Nebraska</td><td class="num">11</td><td class="num">1920</td></tr><tr><td>Colorado</td><td class="num">9</td><td class="num">1923</td></tr><tr><td>Georgia</td><td class="num">7</td><td class="num">1922</td></tr><tr><td>New Hampshire</td><td class="num">7</td><td class="num">1927</td></tr><tr><td>North Dakota</td><td class="num">6</td><td class="num">1924</td></tr><tr><td>Tennessee</td><td class="num">6</td><td class="num">1922</td></tr><tr><td>Washington</td><td class="num">6</td><td class="num">1919</td></tr><tr><td>Alabama</td><td class="num">5</td><td class="num">1924</td></tr><tr><td>Maryland</td><td class="num">5</td><td class="num">1923</td></tr><tr><td>Oregon</td><td class="num">5</td><td class="num">1923</td></tr><tr><td>Idaho</td><td class="num">4</td><td class="num">1928</td></tr><tr><td>South Dakota</td><td class="num">4</td><td class="num">1928</td></tr><tr><td>Utah</td><td class="num">4</td><td class="num">1920</td></tr><tr><td>Arizona</td><td class="num">3</td><td class="num">1926</td></tr><tr><td>Kentucky</td><td class="num">3</td><td class="num">1927</td></tr><tr><td>Louisiana</td><td class="num">3</td><td class="num">1925</td></tr><tr><td>Maine</td><td class="num">3</td><td class="num">1926</td></tr><tr><td>Mississippi</td><td class="num">3</td><td class="num">1928</td></tr><tr><td>Montana</td><td class="num">3</td><td class="num">1930</td></tr><tr><td>Arkansas</td><td class="num">2</td><td class="num">1924</td></tr><tr><td>Nevada</td><td class="num">2</td><td class="num">1924</td></tr><tr><td>New Mexico</td><td class="num">2</td><td class="num">1928</td></tr><tr><td>South Carolina</td><td class="num">2</td><td class="num">1924</td></tr><tr><td>Vermont</td><td class="num">2</td><td class="num">1931</td></tr><tr><td>Wyoming</td><td class="num">2</td><td class="num">1927</td></tr><tr><td>Delaware</td><td class="num">1</td><td class="num">1924</td></tr><tr><td>District of Columbia</td><td class="num">1</td><td class="num">1920</td></tr><tr><td>West Virginia</td><td class="num">1</td><td class="num">1931</td></tr></tbody></table>
+      </details>
+      <figcaption class="sp-src">Source: U.S. Department of Commerce, <a href="assets/docs/umn-31951002666700x-1781703149.pdf" rel="noopener" style="border-bottom:1px solid var(--ochre)"><em>Zoned Municipalities in the United States</em></a>, data as of January 1, 1933 (Table II). Years are when each municipality adopted its ordinance. Read more in <a href="assets/docs/All-Zoning-Is-New-York-City-Zoning-Suder-2026.pdf" rel="noopener" style="border-bottom:1px solid var(--ochre)"><em>All Zoning Is New York City Zoning</em></a>.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="band cta-band">
   <div class="wrap">
     <div>
@@ -227,5 +290,8 @@
 
 <script src="assets/js/site.js?v=20260922c"></script>
 <script src="assets/js/map.js?v=20260921"></script>
+<script src="assets/js/vendor/d3-7.9.0.min.js"></script>
+<script src="assets/js/zoning-spread-data.js?v=20261014"></script>
+<script src="assets/js/zoning-spread.js?v=20261014"></script>
 </body>
 </html>

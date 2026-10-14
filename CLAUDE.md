@@ -31,7 +31,7 @@ Header and footer markup is duplicated verbatim in all 45 site pages (every `*.h
 
 ## Cache busting
 
-Assets are served with a one-year immutable cache (netlify.toml). After editing `assets/css/site.css`, `assets/js/site.js`, or `assets/js/map.js`, change the `?v=` value on their tags in every page (scripted replace across `*.html`, assert 45, plus the stylesheet tag in `scorecard-report-sample.html`). Give changed images new file names rather than overwriting.
+Assets are served with a one-year immutable cache (netlify.toml). After editing `assets/css/site.css`, `assets/js/site.js`, or `assets/js/map.js`, change the `?v=` value on their tags in every page (scripted replace across `*.html`, assert 45, plus the stylesheet tag in `scorecard-report-sample.html`). Give changed images new file names rather than overwriting. `resources.html` alone also loads `assets/js/vendor/d3-7.9.0.min.js` (D3, versioned by file name), `assets/js/zoning-spread-data.js` and `assets/js/zoning-spread.js` for the "How zoning spread" map; bump their `?v=` on that page when you edit them.
 
 ## Do not
 
