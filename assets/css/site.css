@@ -699,3 +699,6 @@ a.card:hover{box-shadow:0 8px 30px rgba(14,15,13,.08)}
   .aw .aw-go{margin-top:auto;padding-top:12px;font-size:13px;color:var(--yellow)}
   @media (max-width:900px){.aw-grid{grid-template-columns:1fr 1fr}}
   @media (max-width:560px){.aw-grid{grid-template-columns:1fr}}
+  /* awards grid: let a final odd card fill the row */
+  @media (min-width:901px){.aw-grid .aw:last-child:nth-child(3n+2){grid-column:span 2}}
+  @media (min-width:561px) and (max-width:900px){.aw-grid .aw:last-child:nth-child(odd){grid-column:span 2}}
