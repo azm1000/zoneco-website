@@ -111,7 +111,7 @@
   .progress{height:1px;background:var(--line-dark)}
   .progress i{display:block;height:1px;width:0;background:var(--paper);transition:width .1s linear}
   .overlay{position:fixed;inset:0;z-index:25;background:rgba(14,15,13,.96);color:var(--paper);overflow:auto;padding-top:72px}
-  .overlay[hidden]{display:none}
+  .overlay[hidden]{display:none!important}
   .overlay-in{display:grid;grid-template-columns:1fr 1.2fr;min-height:calc(100vh - 72px)}
   .ov-col{padding:40px 0}
   .ov-nav{border-right:1px solid var(--line-dark);padding-right:48px;display:flex;flex-direction:column}
@@ -234,7 +234,7 @@
   .usmap .dot:hover{r:6}
   .tip{position:absolute;z-index:5;background:var(--paper);color:var(--ink);font-size:13px;line-height:1.35;padding:8px 10px;max-width:260px;pointer-events:none;transform:translate(-50%,calc(-100% - 12px))}
   .tip b{display:block;font-weight:500}
-  .tip[hidden]{display:none}
+  .tip[hidden]{display:none!important}
   .usmap .dot{cursor:pointer}
   .legend{display:flex;gap:24px;margin-top:14px;font-size:13px;color:var(--sage)}
   .legend i{display:inline-block;width:10px;height:10px;margin-right:8px;vertical-align:-1px}
@@ -702,3 +702,6 @@ a.card:hover{box-shadow:0 8px 30px rgba(14,15,13,.08)}
   /* awards grid: let a final odd card fill the row */
   @media (min-width:901px){.aw-grid .aw:last-child:nth-child(3n+2){grid-column:span 2}}
   @media (min-width:561px) and (max-width:900px){.aw-grid .aw:last-child:nth-child(odd){grid-column:span 2}}
+
+  /* anything the scripts hide (news filters, portfolio search) stays hidden, whatever its display rule */
+  [hidden]{display:none!important}
