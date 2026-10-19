@@ -584,7 +584,7 @@ a.card:hover{box-shadow:0 8px 30px rgba(14,15,13,.08)}
 .talks .yr{color:var(--slate);font-variant-numeric:tabular-nums;font-size:14px}
 .talks .who{color:var(--mute);font-size:13px;text-align:right;white-space:nowrap}
 .talks b{font-weight:500}
-.talks span.where{color:var(--mute)}
+.talks span.where{display:block;color:var(--mute)}
 
 /* Regions row */
 .regions.light{background:var(--line);border-color:var(--line)}
