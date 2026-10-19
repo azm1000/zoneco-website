@@ -681,3 +681,21 @@ a.card:hover{box-shadow:0 8px 30px rgba(14,15,13,.08)}
 .tip b+b{margin-top:6px}
 .tip{max-width:300px;max-height:260px;overflow:auto}
 @media (max-width:600px){.map-regions{display:none}.legend{flex-wrap:wrap;gap:10px}.legend .hint{margin-left:0;flex-basis:100%}}
+
+  /* Awards band (home and Projects): large, dark, one card per award */
+  .aw-band .sec-head p{color:var(--sage)}
+  .aw-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);margin-top:8px}
+  .aw{background:var(--ink);padding:clamp(24px,2.6vw,36px);display:flex;flex-direction:column;gap:10px;color:var(--paper);position:relative}
+  a.aw:hover{background:var(--ink-2)}
+  .aw .aw-yr{font-size:clamp(40px,4.4vw,60px);font-weight:500;letter-spacing:-.03em;line-height:1;display:flex;align-items:center;gap:14px}
+  .aw .aw-yr::before{content:"+";font-weight:300;font-size:.8em;line-height:1}
+  .aw:nth-child(4n+1) .aw-yr::before{color:var(--green)}
+  .aw:nth-child(4n+2) .aw-yr::before{color:var(--yellow)}
+  .aw:nth-child(4n+3) .aw-yr::before{color:var(--pink)}
+  .aw:nth-child(4n+4) .aw-yr::before{color:#4F9BD9}
+  .aw h3{font-size:clamp(19px,1.5vw,22px);font-weight:500;line-height:1.25;margin-top:6px}
+  .aw .aw-proj{font-size:15px;color:var(--paper)}
+  .aw .aw-org{font-size:13px;color:var(--sage)}
+  .aw .aw-go{margin-top:auto;padding-top:12px;font-size:13px;color:var(--yellow)}
+  @media (max-width:900px){.aw-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:560px){.aw-grid{grid-template-columns:1fr}}
