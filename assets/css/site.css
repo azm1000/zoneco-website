@@ -417,6 +417,7 @@ hr.rule{border:0;border-top:1px solid var(--line);margin:clamp(40px,5vw,72px) 0}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .tiles.two{grid-template-columns:repeat(2,1fr)}
 .tiles.four{grid-template-columns:repeat(4,1fr)}
+.tiles.four .tile.wide{grid-column:span 3}
 .tile{background:var(--paper);padding:28px 26px 30px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-height:180px;transition:background .15s}
 a.tile:hover{background:#fff}
 .tile h3{font-size:clamp(18px,1.4vw,21px);max-width:18ch;margin-bottom:8px}
@@ -622,6 +623,7 @@ a.card:hover{box-shadow:0 8px 30px rgba(14,15,13,.08)}
   .cols,.cols.rev{grid-template-columns:1fr}
   .aside{position:static}
   .tiles,.tiles.four{grid-template-columns:1fr 1fr}
+  .tiles.four .tile.wide{grid-column:auto}
   .gallery,.gallery.four{grid-template-columns:1fr 1fr}
   .cards,.cards.four,.feed{grid-template-columns:1fr 1fr}
   .people{grid-template-columns:1fr 1fr}
