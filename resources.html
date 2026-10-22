@@ -224,6 +224,129 @@
   </div>
 </section>
 
+<section class="band tint" id="lineage">
+<style>
+#lineage{--rule:var(--line);--muted:var(--mute);--blue-faint:rgba(0,80,144,.07);--flag:var(--yellow-text);--flag-faint:rgba(240,200,24,.12)}
+#lineage .ln-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:24px}
+#lineage .ln-head p{color:#3a3c37;max-width:60ch}
+#lineage .ln-box{background:#fff;border:1px solid var(--line);padding:clamp(16px,2.5vw,32px)}
+#lineage .ln-tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);padding-bottom:14px}
+#lineage .ln-tabs button{font:inherit;font-size:14px;font-weight:500;background:none;border:1px solid transparent;padding:8px 14px;cursor:pointer;color:var(--mute);min-height:40px}
+#lineage .ln-tabs button[aria-current="page"]{color:var(--ink);border-color:var(--ink)}
+#lineage .sw{display:inline-block;width:22px;height:22px;border:1.5px solid var(--blue);vertical-align:middle;flex:none}
+#lineage .sw.copied{background:var(--blue)}
+#lineage .sw.adapted{background:repeating-linear-gradient(45deg,var(--blue) 0 2px,transparent 2px 6px)}
+#lineage .sw.replaced{background:repeating-linear-gradient(45deg,var(--blue) 0 1.5px,transparent 1.5px 7px),repeating-linear-gradient(-45deg,var(--blue) 0 1.5px,transparent 1.5px 7px)}
+#lineage .sw.absent{background:transparent;border-style:dashed}
+#lineage .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--mute);margin:10px 0 0}
+#lineage .legend span{display:inline-flex;align-items:center;gap:7px}
+#lineage .legend .sw{width:14px;height:14px}
+#lineage .strip{display:flex;flex-wrap:wrap;gap:3px}
+#lineage .lib-intro{max-width:66ch;margin:22px 0 16px;font-size:17px;line-height:1.6}
+#lineage .rep-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;padding:24px 0 16px;border-bottom:1px solid var(--line)}
+#lineage .rep-head .jur{font-size:16px;color:var(--mute);margin:0 0 4px}
+#lineage .rep-head h2{margin:0;font-size:clamp(30px,4.5vw,48px);line-height:1;letter-spacing:-.02em}
+#lineage .rep-head .adopt{margin:8px 0 0;color:var(--mute);font-size:14px}
+#lineage .score{text-align:right}
+#lineage .score b{display:block;font-size:44px;line-height:1;font-weight:500;letter-spacing:-.02em}
+#lineage .score small{color:var(--mute);font-size:13px}
+#lineage .dna{padding:20px 0 6px}
+#lineage .dna .strip{gap:5px}
+#lineage .dna .strip .sw{width:clamp(24px,4vw,42px);height:clamp(24px,4vw,42px);cursor:pointer;border-width:2px}
+#lineage .dna .cap{font-size:13px;color:var(--mute);margin-top:8px}
+#lineage .groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px 22px;padding:16px 0 20px;border-bottom:1px solid var(--line)}
+#lineage .g .gn{font-weight:500;font-size:14px}
+#lineage .g .bar{height:8px;border:1px solid var(--blue);margin:6px 0 3px;position:relative}
+#lineage .g .bar i{position:absolute;inset:0 auto 0 0;background:var(--blue)}
+#lineage .g .gp{font-size:13px;color:var(--mute)}
+#lineage .summary{font-size:17px;line-height:1.65;max-width:68ch;margin:22px 0 8px}
+#lineage h3.sec{font-size:22px;margin:36px 0 4px}
+#lineage .sec-note{color:var(--mute);margin:0 0 12px;font-size:14px;max-width:70ch}
+#lineage .grp-title{font-weight:600;font-size:16px;margin:24px 0 0;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+#lineage .m{display:grid;grid-template-columns:30px minmax(0,1fr) minmax(0,1.25fr);gap:6px 20px;padding:14px 0;border-bottom:1px solid var(--line);scroll-margin-top:96px}
+#lineage .m.hl{background:var(--blue-faint)}
+#lineage .m .name{font-weight:600;font-size:16px;line-height:1.25}
+#lineage .m .vd{font-size:13px;font-weight:500;color:var(--blue);margin-top:3px}
+#lineage .m .nyc{font-size:14px;color:var(--mute);margin-top:6px;line-height:1.5}
+#lineage .m .ev q{display:block;font-style:italic;font-size:15px;line-height:1.5;quotes:"\201C" "\201D"}
+#lineage .m .ev .secref{font-size:13px;color:var(--mute);margin:3px 0 6px}
+#lineage .m .ev p{margin:0;font-size:15px;line-height:1.55}
+#lineage .dep{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 20px;padding:14px 12px;border-left:3px solid var(--yellow);background:var(--flag-faint);margin:10px 0}
+#lineage .dep .name{font-weight:600;font-size:16px}
+#lineage .dep p{margin:0;font-size:15px;line-height:1.55}
+#lineage .dep q{font-style:italic;quotes:"\201C" "\201D"}
+#lineage .lineage{font-size:16px;line-height:1.6;max-width:68ch}
+#lineage .actions{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+#lineage .btn{font:inherit;font-size:14px;font-weight:500;background:var(--ink);color:var(--paper);border:1px solid var(--ink);padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-block}
+#lineage .btn:hover{background:var(--blue);border-color:var(--blue)}
+#lineage .btn.ghost{background:none;color:var(--ink)}
+#lineage .btn.ghost:hover{color:var(--paper);background:var(--blue)}
+#lineage .hint{color:var(--mute);font-size:13px;margin:0}
+#lineage .base-m{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) 70px;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+#lineage .base-m .name{font-weight:600}
+#lineage .base-m p{margin:0;font-size:15px;line-height:1.5}
+#lineage .base-m .w{color:var(--mute);font-size:13px;text-align:right}
+#lineage .eds{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:2px solid var(--ink);margin-top:20px}
+#lineage .ed{padding:12px 12px 14px 0;border-right:1px solid var(--line)}
+#lineage .ed:last-child{border-right:0}
+#lineage .ed+.ed{padding-left:12px}
+#lineage .ed b{display:block;font-size:28px;line-height:1;font-weight:500}
+#lineage .ed span{display:block;font-size:13px;color:var(--mute);margin-top:4px;line-height:1.3}
+#lineage .tscroll{overflow-x:auto;margin-top:8px;border-top:1px solid var(--line)}
+#lineage table.hx{border-collapse:collapse;min-width:900px;width:100%;font-size:14px}
+#lineage table.hx th,#lineage table.hx td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+#lineage table.hx thead th{font-size:15px;border-bottom:2px solid var(--ink);background:#fff}
+#lineage table.hx th[scope=row]{font-weight:500;width:150px}
+#lineage table.hx tr.grp th{font-weight:600;font-size:15px;padding-top:20px;border-bottom:2px solid var(--ink)}
+#lineage table.hx td{line-height:1.4}
+#lineage table.hx td.chg{box-shadow:inset 3px 0 0 var(--blue);background:var(--blue-faint)}
+#lineage table.hx td.same{color:var(--mute)}
+#lineage table.hx td.mark{text-align:center}
+#lineage .era{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 22px;padding:16px 0;border-bottom:1px solid var(--line)}
+#lineage .era .yr{font-size:28px;font-weight:500;line-height:1}
+#lineage .era .yr small{display:block;font-size:12px;font-weight:400;color:var(--mute);margin-top:4px}
+#lineage .era h4{margin:0 0 6px;font-size:17px}
+#lineage .era p{margin:0;font-size:15px;line-height:1.6;max-width:70ch}
+#lineage .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:9px 16px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+#lineage .toast.on{opacity:1}
+#lineage .ln-src{font-size:13px;color:var(--mute);margin-top:16px}
+@media (max-width:760px){
+  #lineage .ln-head{grid-template-columns:1fr}
+  #lineage .rep-head{grid-template-columns:1fr}
+  #lineage .score{text-align:left}
+  #lineage .m{grid-template-columns:26px minmax(0,1fr)}
+  #lineage .m .ev{grid-column:2}
+  #lineage .dep{grid-template-columns:1fr}
+  #lineage .base-m{grid-template-columns:1fr}
+  #lineage .base-m .w{text-align:left}
+  #lineage .eds{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #lineage .ed:nth-child(3){border-right:0}
+  #lineage .ed:nth-child(4){padding-left:0}
+  #lineage .era{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){#lineage *{transition:none!important}}
+</style>
+  <div class="wrap">
+    <div class="ln-head">
+      <div>
+        <p class="label">Interactive comparison</p>
+        <h2>Ordinance lineage: New York 1916 in a suburban code</h2>
+      </div>
+      <p>How much of New York&rsquo;s 1916 Building Zone Resolution lives in another town&rsquo;s code? We scored Glen Ellyn, Illinois&rsquo; 1923 zoning ordinance against seventeen hallmarks of the New York resolution, then traced how the village&rsquo;s code changed through 1993.</p>
+    </div>
+    <div class="ln-box">
+      <nav class="ln-tabs" aria-label="Ordinance lineage views">
+        <button type="button" data-view="report">Glen Ellyn, 1923</button>
+        <button type="button" data-view="history">Code history, 1923&ndash;1993</button>
+        <button type="button" data-view="baseline">The 17 New York hallmarks</button>
+      </nav>
+      <div id="lineage-app"><noscript><p class="lib-intro">This comparison needs JavaScript. You can read the <a href="assets/docs/1923-Zoning-Code-Effective-04-18-1923-Glen-Ellyn-IL.pdf">Glen Ellyn 1923 ordinance</a> directly.</p></noscript></div>
+      <p class="ln-src">Sources: Glen Ellyn, Illinois Ordinance No. 512 (1923) and later editions of the village zoning code; New York City Building Zone Resolution (1916). Read more in <a href="assets/docs/All-Zoning-Is-New-York-City-Zoning-Suder-2026.pdf" rel="noopener" style="border-bottom:1px solid var(--ochre)"><em>All Zoning Is New York City Zoning</em></a>.</p>
+    </div>
+    <div class="toast" id="lineage-toast" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
 <section class="band cta-band">
   <div class="wrap">
     <div>
@@ -293,5 +416,6 @@
 <script src="assets/js/vendor/d3-7.9.0.min.js"></script>
 <script src="assets/js/zoning-spread-data.js?v=20261014"></script>
 <script src="assets/js/zoning-spread.js?v=20261014"></script>
+<script src="assets/js/zoning-lineage.js?v=20261022"></script>
 </body>
 </html>
