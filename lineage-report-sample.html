@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Code Lineage Report — ZoneCo</title>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css?v=20261023">
+<!--
+  Results page for the Code Lineage tool (design sample and report template).
+  Standalone page: no site header/footer, not in sitemap.xml.
+  Everything shown is rendered from the REPORT object in the <script> at the bottom;
+  .claude/skills/trace-code-lineage fills that object in for each request.
+  The sample is ZoneCo's published Glen Ellyn, Illinois 1923 comparison.
+-->
+<style>
+  body{background:var(--paper)}
+  .rp-top{position:static;background:var(--ink);color:var(--paper)}
+  .rp-top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+  .rp-top img{height:32px;width:auto}
+  .rp-top img.prn{display:none;height:44px}
+  .rp-top .t{font-size:13px;color:var(--sage);letter-spacing:.02em}
+  .sample{background:var(--yellow);color:var(--ink);font-size:13px;font-weight:500;text-align:center;padding:8px 16px}
+  .rp-head{padding:clamp(40px,6vw,72px) 0 clamp(28px,4vw,40px);border-bottom:1px solid var(--line)}
+  .rp-head h1{font-size:clamp(34px,4.6vw,60px);margin:10px 0 18px}
+  .rp-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:28px}
+  .rp-meta dt{font-size:12px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+  .rp-meta dd{font-size:15px;margin-top:4px;overflow-wrap:anywhere}
+  .print{background:none;border:1px solid var(--ink);font:inherit;font-size:14px;font-weight:500;padding:10px 16px;cursor:pointer;margin-top:24px}
+  .print:hover{background:var(--ink);color:var(--paper)}
+
+  .score{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(28px,5vw,72px);align-items:start;padding-top:clamp(36px,5vw,56px);padding-bottom:clamp(36px,5vw,56px)}
+  .score .num{font-size:clamp(72px,10vw,128px);font-weight:500;letter-spacing:-.04em;line-height:1}
+  .score p.what{margin-top:14px;max-width:44ch;color:#3a3c37}
+  .sw{display:inline-block;width:22px;height:22px;border:1.5px solid var(--blue);vertical-align:middle;flex:none}
+  .sw.copied{background:var(--blue)}
+  .sw.adapted{background:repeating-linear-gradient(45deg,var(--blue) 0 2px,transparent 2px 6px)}
+  .sw.replaced{background:repeating-linear-gradient(45deg,var(--blue) 0 1.5px,transparent 1.5px 7px),repeating-linear-gradient(-45deg,var(--blue) 0 1.5px,transparent 1.5px 7px)}
+  .sw.absent{background:transparent;border-style:dashed}
+  .strip{display:flex;flex-wrap:wrap;gap:5px}
+  .strip .sw{width:clamp(22px,3.2vw,36px);height:clamp(22px,3.2vw,36px);border-width:2px}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--mute);margin-top:12px}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .legend .sw{width:14px;height:14px}
+  .groups{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px 18px;margin-top:26px}
+  .g .gn{font-weight:500;font-size:14px}
+  .g .bar{height:8px;border:1px solid var(--blue);margin:6px 0 3px;position:relative}
+  .g .bar i{position:absolute;inset:0 auto 0 0;background:var(--blue)}
+  .g .gp{font-size:13px;color:var(--mute)}
+
+  .rp-sec{padding:clamp(40px,5vw,64px) 0;border-top:1px solid var(--line)}
+  .rp-sec h2{font-size:clamp(26px,2.6vw,36px);margin-bottom:8px}
+  .rp-sec p.sub{color:var(--mute);max-width:70ch;margin-bottom:24px}
+  .summary{font-size:18px;line-height:1.65;max-width:68ch}
+  .grp{font-weight:600;font-size:16px;margin:28px 0 0;padding-bottom:6px;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between}
+  .grp span{font-weight:400;color:var(--mute);font-size:14px}
+  .grp:first-of-type{margin-top:0}
+  .m{display:grid;grid-template-columns:30px minmax(0,1fr) minmax(0,1.3fr);gap:6px 20px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .m .name{font-weight:600;font-size:16px;line-height:1.25}
+  .m .vd{font-size:13px;font-weight:500;color:var(--blue);margin-top:3px}
+  .m .nyc{font-size:14px;color:var(--mute);margin-top:6px;line-height:1.5}
+  .m q{display:block;font-style:italic;font-size:15px;line-height:1.5}
+  .m .secref{font-size:13px;color:var(--mute);margin:3px 0 6px}
+  .m p{font-size:15px;line-height:1.55}
+  .dep{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:6px 20px;padding:14px 14px;border-left:3px solid var(--yellow);background:rgba(240,200,24,.12);margin:10px 0}
+  .dep .name{font-weight:600;font-size:16px}
+  .dep .secref{font-size:13px;color:var(--mute)}
+  .dep p{font-size:15px;line-height:1.55}
+  .dep q{font-style:italic}
+  .lineage{font-size:17px;line-height:1.6;max-width:68ch}
+  .method{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px)}
+  .method p{font-size:15px;color:#3a3c37}
+  .method p+p{margin-top:12px}
+
+  .rp-cta{background:var(--ink);color:var(--paper);padding:clamp(44px,6vw,72px) 0}
+  .rp-cta .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap}
+  .rp-cta h2{font-size:clamp(28px,3vw,42px);max-width:22ch}
+  .rp-cta p{color:var(--sage);margin-top:12px;max-width:56ch}
+  .rp-cta .actions{display:flex;gap:12px;flex-wrap:wrap}
+  .rp-cta .btn{border-color:var(--paper);color:var(--paper)}
+  .rp-cta .btn.fill{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+  .rp-foot{background:var(--ink);color:var(--sage);font-size:12px;padding:0 0 36px}
+  .rp-foot .wrap{border-top:1px solid var(--line-dark);padding-top:24px}
+  .rp-foot p+p{margin-top:10px}
+  .rp-foot a{color:var(--paper)}
+
+  @media (max-width:900px){
+    .rp-meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .score{grid-template-columns:1fr}
+    .groups{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .m{grid-template-columns:26px minmax(0,1fr)}
+    .m .ev{grid-column:2}
+    .dep{grid-template-columns:1fr}
+    .method{grid-template-columns:1fr}
+  }
+  @media print{
+    .sample,.print,.rp-cta .actions{display:none}
+    body{background:#fff}
+    .rp-top,.rp-cta,.rp-foot{background:#fff;color:var(--ink)}
+    .rp-top img.scr{display:none}
+    .rp-top img.prn{display:block}
+    .rp-cta p,.rp-foot{color:var(--mute)}
+    .m,.dep,.score{break-inside:avoid}
+    .sw{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<div class="sample" id="sample-flag">Sample report: ZoneCo&rsquo;s comparison of Glen Ellyn, Illinois&rsquo; 1923 zoning ordinance.</div>
+<header class="rp-top">
+  <div class="wrap">
+    <a href="index.html" aria-label="ZoneCo home"><img class="scr" src="assets/img/logo.png" alt="ZoneCo"><img class="prn" src="assets/img/logo-tagline-dark-transparent.png" alt="ZoneCo"></a>
+    <span class="t">Code Lineage Report</span>
+  </div>
+</header>
+
+<main>
+<section class="rp-head">
+  <div class="wrap">
+    <p class="label">Code Lineage Report</p>
+    <h1 id="r-title"></h1>
+    <p class="lede" style="max-width:62ch">How much of New York City&rsquo;s 1916 Building Zone Resolution, the first comprehensive zoning ordinance in America, lives on in your code? We compared your code with seventeen hallmarks of the 1916 resolution.</p>
+    <dl class="rp-meta">
+      <div><dt>Prepared for</dt><dd id="r-name"></dd></div>
+      <div><dt>Jurisdiction</dt><dd id="r-juris"></dd></div>
+      <div><dt>Document reviewed</dt><dd id="r-doc"></dd></div>
+      <div><dt>Date</dt><dd id="r-date"></dd></div>
+    </dl>
+    <button class="print" type="button" onclick="window.print()">Print or save as PDF</button>
+  </div>
+</section>
+
+<section>
+  <div class="wrap score">
+    <div>
+      <p class="label">New York 1916 inheritance</p>
+      <div class="num" id="r-total"></div>
+      <p class="what" id="r-what"></p>
+    </div>
+    <div>
+      <p class="label">The seventeen hallmarks, left to right</p>
+      <div class="strip" id="r-strip"></div>
+      <div class="legend" id="r-legend"></div>
+      <div class="groups" id="r-groups"></div>
+    </div>
+  </div>
+</section>
+
+<section class="rp-sec">
+  <div class="wrap">
+    <h2>What we found</h2>
+    <p class="summary" id="r-summary"></p>
+  </div>
+</section>
+
+<section class="rp-sec">
+  <div class="wrap">
+    <h2>Hallmark by hallmark</h2>
+    <p class="sub">Left: what New York did in 1916. Right: what your code says, with the section it comes from, so your staff can check it.</p>
+    <div id="r-marks"></div>
+  </div>
+</section>
+
+<section class="rp-sec" id="r-dep-sec">
+  <div class="wrap">
+    <h2>Not from New York</h2>
+    <p class="sub">Provisions with no counterpart in the 1916 resolution: clues to your code&rsquo;s other sources.</p>
+    <div id="r-deps"></div>
+  </div>
+</section>
+
+<section class="rp-sec" id="r-lin-sec">
+  <div class="wrap">
+    <h2>Where it may have come from</h2>
+    <p class="lineage" id="r-lineage"></p>
+  </div>
+</section>
+
+<section class="rp-sec">
+  <div class="wrap method">
+    <div>
+      <h2>How the comparison works</h2>
+      <p>Each hallmark is a device that defined New York&rsquo;s 1916 resolution, from its three overlay maps and street-width height rule to its board of appeals and owner protest petition. We mark each as copied (carried over nearly intact, often in the same words), adapted (same idea, different numbers or mechanics), replaced (the topic is handled by a different device), or absent.</p>
+      <p>Copied counts fully and adapted counts half. Hallmarks central to New York&rsquo;s scheme count double, so the percentage reflects how much of the core design survives, not just how many phrases match.</p>
+    </div>
+    <div>
+      <h2>What this report is, and is not</h2>
+      <p>This is a historical and comparative reading of the document you provided. It does not account for amendments not included in the document or for how the code is administered in practice.</p>
+      <p>It is educational and is not legal advice. See our <a href="terms.html" style="border-bottom:1px solid var(--ochre)">terms of use</a>. Read more in Sean Suder&rsquo;s paper, <a href="assets/docs/All-Zoning-Is-New-York-City-Zoning-Suder-2026.pdf" style="border-bottom:1px solid var(--ochre)"><em>All Zoning Is New York City Zoning</em></a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rp-cta">
+  <div class="wrap">
+    <div>
+      <h2>An inherited code doesn&rsquo;t need defending or demolishing.</h2>
+      <p>It needs calibrating. A ZoneCo zoning diagnostic tests every part of your code against your plan and the places you actually have, and shows what to keep, what to change, and what to retire.</p>
+    </div>
+    <div class="actions">
+      <a class="btn fill" href="contact.html">Talk to ZoneCo</a>
+      <a class="btn" href="diagnostics.html">About zoning diagnostics</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="rp-foot">
+  <div class="wrap">
+    <p>ZoneCo, LLC &middot; 1502 Vine Street, Fourth Floor, Cincinnati, Ohio 45202 &middot; <a href="mailto:ssuder@thezoneco.com">ssuder@thezoneco.com</a></p>
+    <p>Although some ZoneCo professionals are also attorneys who may be separately engaged to provide legal representation in states where we are licensed to practice law, ZoneCo is not a law firm. ZoneCo professionals do not provide legal representation or services and are not engaged in the practice of law in any jurisdiction. Engaging ZoneCo does not form an attorney-client relationship.</p>
+    <p>&copy; 2026 ZoneCo, LLC. Code Lineage Report &copy; ZoneCo.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------------------------------------------------------
+   The seventeen hallmarks and verdicts. Fixed: same as the comparison on
+   resources.html (assets/js/zoning-lineage.js). Do not change per report.
+--------------------------------------------------------------------------- */
+var GROUPS = [
+  {id:"structure", name:"Framework"},
+  {id:"use", name:"Use districts"},
+  {id:"height", name:"Height and setback"},
+  {id:"area", name:"Yards and courts"},
+  {id:"admin", name:"Administration"}
+];
+var MARKERS = [
+  {id:"m1", g:"structure", w:2, name:"Three overlay maps",
+   nyc:"Use, height and area were regulated through three separate district maps, so every lot carried three independent designations."},
+  {id:"m2", g:"structure", w:1, name:"Maps adopted by reference",
+   nyc:"The district maps were made part of the resolution, with rules for reading boundaries that follow streets and lot lines."},
+  {id:"m3", g:"structure", w:1, name:"The 1916 definitional vocabulary",
+   nyc:"Defined terms such as street wall, yard, outer court, inner court and height of building, with height measured from the curb."},
+  {id:"m4", g:"use", w:2, name:"Residence, business, unrestricted",
+   nyc:"Three use-district classes. Residence districts allowed apartments as well as houses; unrestricted districts took industry."},
+  {id:"m5", g:"use", w:2, name:"Cumulative use hierarchy",
+   nyc:"Each less-restricted district permits everything allowed in the more-restricted districts plus its own uses."},
+  {id:"m6", g:"use", w:1, name:"Limits on industry in business districts",
+   nyc:"Business districts excluded listed nuisance trades and capped manufacturing incidental to a business at a share of floor area."},
+  {id:"m7", g:"height", w:2, name:"Height tied to street width",
+   nyc:"Street-wall height limited to a multiple of the width of the street (one, one-and-a-quarter, one-and-a-half, two or two-and-a-half times)."},
+  {id:"m8", g:"height", w:2, name:"Setback above the street wall",
+   nyc:"Above the street-wall limit a building may rise further if it steps back at a fixed ratio — the source of the wedding-cake skyline."},
+  {id:"m9", g:"height", w:1, name:"Tower exception",
+   nyc:"A tower covering no more than a quarter of the lot could rise without height limit."},
+  {id:"m10", g:"height", w:1, name:"Rooftop appurtenance exceptions",
+   nyc:"Chimneys, tanks, bulkheads, spires and similar rooftop structures exempted from the height limits."},
+  {id:"m11", g:"area", w:2, name:"Yards and courts sized by building height",
+   nyc:"Area districts set yard and court dimensions as so many inches per foot of building height."},
+  {id:"m12", g:"area", w:1, name:"Inner-court area formula",
+   nyc:"Inner courts must have an area at least twice the square of their required least dimension (a carryover from tenement-house law)."},
+  {id:"m13", g:"area", w:1, name:"Required rear yards",
+   nyc:"A rear yard required on every lot, with its depth set by the area district."},
+  {id:"m14", g:"admin", w:2, name:"Nonconforming uses",
+   nyc:"Existing uses may continue and may change only to a use of the same or a more restricted class."},
+  {id:"m15", g:"admin", w:2, name:"Board of appeals and variances",
+   nyc:"A board of appeals may vary provisions where strict application causes practical difficulties or unnecessary hardship."},
+  {id:"m16", g:"admin", w:1, name:"Owner protest on amendments",
+   nyc:"A protest by owners of 20 percent of affected frontage forces a supermajority vote (three-fourths in New York)."},
+  {id:"m17", g:"admin", w:1, name:"Minimum-requirements clause",
+   nyc:"Provisions are minimum requirements for public health, safety and general welfare; the stricter rule controls in a conflict."}
+];
+var VERDICTS = {
+  copied:{label:"Copied", value:1, desc:"Carried over nearly intact, often in the same words"},
+  adapted:{label:"Adapted", value:0.5, desc:"Same idea, changed numbers or mechanics"},
+  replaced:{label:"Replaced", value:0, desc:"The topic is handled by a different, non-New York device"},
+  absent:{label:"Absent", value:0, desc:"Not in the ordinance"}
+};
+
+/* ---------------------------------------------------------------------------
+   REPORT: the only part that changes per request.
+   findings: one entry per hallmark m1-m17: v (copied|adapted|replaced|absent),
+   sec (section of the code), ev (exact quotation, under 30 words, or ""),
+   note (one or two plain sentences). departures: up to six provisions with no
+   New York counterpart. lineage: hypotheses about intermediate sources.
+--------------------------------------------------------------------------- */
+var REPORT = {
+  sample: true,
+  banner: "",
+  name: "Sample report",
+  document: "Ordinance No. 512 (1923)",
+  date: "October 23, 2026",
+  title:"Ordinance No. 512", jurisdiction:"Glen Ellyn, Illinois", year:"1923",
+  adopted:"Passed April 18, 1923. Published May 11, 1923. Signed by Village President Herbert S. Gilbert.",
+  summary:"Glen Ellyn took New York’s administrative chassis almost whole: the definitions, the court arithmetic, the inner-court formula, the nonconforming-use rule, the 20 percent protest petition and the minimum-requirements clause all read like 1916. What it threw out was New York’s central invention. There are no height districts keyed to street width, no setback planes and no tower rule — just flat limits of 35 and 45 feet. In their place the village added suburban devices New York never used: lot coverage caps, families-per-acre density, front building lines, and an “A” district reserved for single-family houses.",
+  findings:{
+    m1:{v:"replaced", sec:"Sec. 2", ev:"The Use, Height and Area regulations are uniform in each class of district", note:"One map and four combined classes instead of three independent overlays. Every lot gets a single designation."},
+    m2:{v:"copied", sec:"Sec. 2, Sec. 16", ev:"shall be as much a part of this ordinance as if the notations, references and other matters set forth by said map were all fully described herein", note:"Boundary rules in Sec. 16 (streets, alleys, lot lines, map scale) follow the New York pattern."},
+    m3:{v:"copied", sec:"Sec. 1", ev:"Street Wall: The main wall nearest to and facing on a street", note:"Street wall, outer court, length of outer court, height of court or yard all appear. Height is measured from sidewalk grade, with added rules for mansard, gable and hip roofs suited to houses."},
+    m4:{v:"adapted", sec:"Sec. 2–6", ev:"“A” Residence Districts, “B” Residence Districts, Local Business Districts, Commercial Districts", note:"Four classes, with residence split in two and no unrestricted or industrial district at all, so manufacturing has no home in the village."},
+    m5:{v:"copied", sec:"Sec. 4–6", ev:"except for the uses permitted in the “A” Residence Districts and the following uses", note:"Each district inherits the uses of the more restricted ones; Commercial permits “the uses permitted in the other districts.”"},
+    m6:{v:"adapted", sec:"Sec. 5", ev:"not more than forty (40) per cent of the floor area devoted to industry or storage purposes incidental to such primary use", note:"New York’s floor-area cap on incidental industry survives, with a five-employee limit added. Unlike New York’s exclusion approach, the 47 business uses are listed one by one."},
+    m7:{v:"replaced", sec:"Sec. 3–6", ev:"thirty five (35) feet in height, or two and one half (2½) stories", note:"Flat limits (35 feet in “A”, 45 feet elsewhere) and story counts replace the street-width multiple."},
+    m8:{v:"absent", sec:"", ev:"", note:"No setback ratio above a street-wall height."},
+    m9:{v:"absent", sec:"", ev:"", note:"No tower provision. Sec. 8 does let public and semi-public buildings reach 60 feet with one extra foot of setback per foot of added height."},
+    m10:{v:"copied", sec:"Sec. 8", ev:"Chimneys, cooling towers, elevator bulkheads, fire towers, monuments, pent houses, stacks, stage towers", note:"A near-match of the New York list, continuing through scenery lofts, tanks, water towers, ornamental towers, spires and wireless towers."},
+    m11:{v:"adapted", sec:"Sec. 4–6", ev:"two and one half (2½) inches wide for each foot of height of such court", note:"Courts keep New York’s inches-per-foot arithmetic, but rear and side yards become percentages of lot depth and width, independent of building height."},
+    m12:{v:"copied", sec:"Sec. 4–6", ev:"nor shall its area be less than twice the square of its required least dimension", note:"Verbatim formula, repeated in each district."},
+    m13:{v:"adapted", sec:"Sec. 3", ev:"a rear yard having a depth of not less than fifteen (15) per cent of the depth of the lot", note:"Rear yards required, but as a percentage with a floor of 10 feet and a cap of 25 feet in the “A” district."},
+    m14:{v:"copied", sec:"Sec. 7", ev:"may be changed to a use of the same or higher classification", note:"Includes the one-way ratchet (no return to a lower class) and the 50 percent damage rule for rebuilding."},
+    m15:{v:"adapted", sec:"Sec. 10", ev:"review the actions of the Building Commissioner in order to determine whether they are in accordance with the provisions of this ordinance", note:"Three members with staggered terms, reviewing the Building Commissioner and recommending boundary changes. No hardship variance clause in 1923; it first appears in the 1955 revision, worded in the Illinois statutory form (“practical difficulties or particular hardship”)."},
+    m16:{v:"adapted", sec:"Sec. 18", ev:"twenty (20) per cent of the frontage", note:"Same 20 percent trigger, but a two-thirds vote of the Village Board instead of three-fourths."},
+    m17:{v:"copied", sec:"Sec. 13", ev:"shall be held to be the minimum requirements for the promotion of the public safety, health, convenience, comfort, morals, prosperity, and general welfare", note:"Also keeps the rule that the greater restriction controls."}
+  },
+  departures:[
+    {name:"Single-family-only district", sec:"Sec. 3", ev:"Single Family Dwellings", note:"The “A” district permits only detached single-family homes plus civic uses; apartments are pushed to “B”. New York’s residence districts allowed apartments."},
+    {name:"Lot coverage caps", sec:"Sec. 3–6", ev:"thirty per cent (30%) of the area of an interior lot", note:"30/35 percent in “A”, 50/60 percent in “B”, 90 percent for commercial buildings. New York controlled bulk through yards and courts, not coverage percentages."},
+    {name:"Density by families per acre", sec:"Sec. 3–4", ev:"more than six (6) families on any acre of land", note:"Six families per acre in “A”, twenty in “B”, with a grandfather clause for lots under one-sixth acre recorded before passage."},
+    {name:"Front building lines", sec:"Sec. 9", ev:"whose street wall is nearer than thirty feet from the street line", note:"A 30-foot front setback, adjusted to the block average and capped at 35 feet. New York 1916 required no front yards."},
+    {name:"Accessory building separation", sec:"Sec. 8", ev:"no accessory building shall be located within ten feet of its rear or side lot line", note:"Applies where that line forms part of the front half of a neighbor’s side line."}
+  ],
+  lineage:"The pattern suggests Glen Ellyn worked from an intermediate model rather than the 1916 text directly: the New York administrative and court provisions arrive already fused with suburban devices (coverage caps, families per acre, building lines) that were circulating among Midwestern consultants and in early state-model drafts by 1922–23. Those are good places to look for the exact source."
+};
+
+/* --------------------------- rendering --------------------------- */
+(function(){
+  var R = REPORT;
+  function $(id){return document.getElementById(id)}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function verdict(m){var f=R.findings[m.id];return f&&VERDICTS[f.v]?f.v:"absent"}
+  function score(g){var n=0,d=0;MARKERS.forEach(function(m){if(g&&m.g!==g)return;n+=m.w*VERDICTS[verdict(m)].value;d+=m.w});return d?Math.round(100*n/d):0}
+  function sw(v,t){return '<span class="sw '+v+'" role="img" aria-label="'+esc(t)+'" title="'+esc(t)+'"></span>'}
+
+  if(R.banner) $("sample-flag").textContent=R.banner; else if(!R.sample) $("sample-flag").remove();
+  $("r-title").textContent=R.jurisdiction+(R.year?", "+R.year:"");
+  $("r-name").textContent=R.name; $("r-juris").textContent=R.jurisdiction;
+  $("r-doc").textContent=R.document; $("r-date").textContent=R.date;
+  var t=score(); $("r-total").textContent=t+"%";
+  $("r-what").textContent=t>=60?"Your code is a close descendant of New York’s: much of the 1916 design is still at work in it."
+    :t>=35?"A mixed lineage: your code kept parts of New York’s 1916 design and replaced others with devices from elsewhere."
+    :"A distant relative: little of New York’s 1916 design survives in your code, though traces remain.";
+  $("r-strip").innerHTML=MARKERS.map(function(m){var v=verdict(m);return sw(v,m.name+": "+VERDICTS[v].label)}).join("");
+  $("r-legend").innerHTML=Object.keys(VERDICTS).map(function(k){return "<span>"+sw(k,VERDICTS[k].label)+esc(VERDICTS[k].label)+"</span>"}).join("");
+  $("r-groups").innerHTML=GROUPS.map(function(g){var p=score(g.id);return '<div class="g"><div class="gn">'+esc(g.name)+'</div><div class="bar"><i style="width:'+p+'%"></i></div><div class="gp">'+p+'%</div></div>'}).join("");
+  $("r-summary").textContent=R.summary;
+  $("r-marks").innerHTML=GROUPS.map(function(g){
+    return '<div class="grp">'+esc(g.name)+'<span>'+score(g.id)+'%</span></div>'+MARKERS.filter(function(m){return m.g===g.id}).map(function(m){
+      var f=R.findings[m.id]||{},v=verdict(m);
+      return '<div class="m">'+sw(v,VERDICTS[v].label)+'<div><div class="name">'+esc(m.name)+'</div><div class="vd">'+VERDICTS[v].label+'</div><div class="nyc">New York: '+esc(m.nyc)+'</div></div>'
+        +'<div class="ev">'+(f.ev?'<q>'+esc(f.ev)+'</q>':'')+(f.sec?'<div class="secref">'+esc(f.sec)+'</div>':'')+'<p>'+esc(f.note)+'</p></div></div>';
+    }).join("");
+  }).join("");
+  if(R.departures&&R.departures.length){
+    $("r-deps").innerHTML=R.departures.map(function(d){return '<div class="dep"><div><div class="name">'+esc(d.name)+'</div>'+(d.sec?'<div class="secref">'+esc(d.sec)+'</div>':'')+'</div><p>'+(d.ev?'<q>'+esc(d.ev)+'</q> ':'')+esc(d.note)+'</p></div>'}).join("");
+  } else $("r-dep-sec").remove();
+  if(R.lineage) $("r-lineage").textContent=R.lineage; else $("r-lin-sec").remove();
+})();
+</script>
+</body>
+</html>
