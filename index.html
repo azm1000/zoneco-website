@@ -154,47 +154,57 @@
       <h2>What we do</h2>
       <p class="lede" style="max-width:44ch">From full code rewrites to a single training session, ZoneCo is the complete team for any zoning project.</p>
     </div>
-    <div class="services">
-      <a class="svc" href="zoning-codes.html">
-        <div><h3>Zoning codes and subdivision ordinances</h3><p>Full rewrites, targeted amendments, and unified development codes tailored to your community.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="diagnostics.html">
-        <div><h3>Zoning diagnostics</h3><p>Where every engagement starts: a plain-language report on what your code says, how it performs, and what to fix.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="sign-codes.html">
-        <div><h3>Sign codes</h3><p>Content-neutral sign regulations that meet current constitutional standards.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="historic-preservation.html">
-        <div><h3>Historic preservation ordinances</h3><p>Preservation frameworks that protect character while remaining workable for owners.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="post-adoption.html">
-        <div><h3>Post-adoption services</h3><p>Implementation support, staff training, and code maintenance after adoption.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="trainings.html">
-        <div><h3>Board and commission trainings</h3><p>Practical training for planning commissions, zoning boards, and elected officials.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="on-call.html">
-        <div><h3>On-call zoning services</h3><p>Flexible, as-needed support for communities without in-house zoning capacity.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="impact-mitigation.html">
-        <div><h3>Impact mitigation and community benefits</h3><p>Frameworks for large-scale development, including data centers and energy projects.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="engagement.html">
-        <div><h3>Engagement and education</h3><p>Stakeholder committees, focus groups, open houses, and public hearings, customized to your community.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc cta" href="contact.html">
-        <div><h3>Not sure where to start?</h3><p>Tell us what's not working in your code. We'll tell you what it would take to fix it.</p></div>
-        <span class="go" style="color:var(--ochre)">Contact us</span>
-      </a>
+<style>
+#services .stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+#services .stg{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-top:4px solid var(--c);padding:24px 22px 22px}
+#services .stg-n{display:flex;align-items:center;gap:10px;font-size:clamp(44px,4.4vw,64px);font-weight:500;line-height:.9;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+#services .stg-n .plus{font-weight:300;font-size:.7em;color:var(--c)}
+#services .stg h3{font-size:clamp(24px,2.2vw,30px);margin-top:12px}
+#services .stg h3 a{color:var(--ink)}
+#services .stg h3 a:hover{color:var(--slate)}
+#services .stg > p{font-size:15px;color:var(--mute);margin-top:8px}
+#services .stg ul{list-style:none;margin-top:18px;border-top:1px solid var(--line);flex:1}
+#services .stg li a{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.3;color:var(--ink)}
+#services .stg li a span{color:var(--c);font-weight:500}
+#services .stg li a:hover{color:var(--slate)}
+#services .green{--c:var(--green)} #services .yellow{--c:var(--yellow)} #services .pink{--c:var(--pink)} #services .blue{--c:var(--blue)}
+#services .stg-cta{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:16px;background:var(--ink);color:var(--paper);padding:22px 24px}
+#services .stg-cta h3{font-size:20px}
+#services .stg-cta p{color:var(--sage);font-size:15px;margin-top:4px}
+#services .stg-cta .btn{background:var(--yellow);border:1px solid var(--yellow);color:var(--ink)}
+#services .stg-cta .btn:hover{background:var(--paper);border-color:var(--paper)}
+@media (max-width:1000px){#services .stages{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){#services .stages{grid-template-columns:1fr}}
+</style>
+    <div class="stages">
+      <div class="stg green">
+        <div class="stg-n">01<span class="plus" aria-hidden="true">+</span></div>
+        <h3><a href="services.html#diagnose">Diagnose</a></h3>
+        <p>Find out what your code says, how it performs, and what to fix first.</p>
+        <ul><li><a href="diagnostics.html">Zoning diagnostics<span aria-hidden="true">&rarr;</span></a></li><li><a href="land-use-analytics.html">Land use and location analytics<span aria-hidden="true">&rarr;</span></a></li></ul>
+      </div>
+      <div class="stg yellow">
+        <div class="stg-n">02<span class="plus" aria-hidden="true">+</span></div>
+        <h3><a href="services.html#write">Write</a></h3>
+        <p>Draft the regulations: a whole new code, or the parts that need it.</p>
+        <ul><li><a href="zoning-codes.html">Zoning codes and subdivision ordinances<span aria-hidden="true">&rarr;</span></a></li><li><a href="sign-codes.html">Sign codes<span aria-hidden="true">&rarr;</span></a></li><li><a href="historic-preservation.html">Historic preservation ordinances and guidelines<span aria-hidden="true">&rarr;</span></a></li><li><a href="impact-mitigation.html">Impact mitigation and community benefits<span aria-hidden="true">&rarr;</span></a></li></ul>
+      </div>
+      <div class="stg pink">
+        <div class="stg-n">03<span class="plus" aria-hidden="true">+</span></div>
+        <h3><a href="services.html#engage">Engage</a></h3>
+        <p>Bring residents, boards, and officials along at every step.</p>
+        <ul><li><a href="engagement.html">Engagement and education<span aria-hidden="true">&rarr;</span></a></li><li><a href="trainings.html">Board and commission trainings<span aria-hidden="true">&rarr;</span></a></li></ul>
+      </div>
+      <div class="stg blue">
+        <div class="stg-n">04<span class="plus" aria-hidden="true">+</span></div>
+        <h3><a href="services.html#sustain">Sustain</a></h3>
+        <p>Keep the code working after adoption, with help when you need it.</p>
+        <ul><li><a href="post-adoption.html">Post-adoption services<span aria-hidden="true">&rarr;</span></a></li><li><a href="on-call.html">On-call zoning services<span aria-hidden="true">&rarr;</span></a></li></ul>
+      </div>
+    </div>
+    <div class="stg-cta">
+      <div><h3>Not sure where to start?</h3><p>Tell us what's not working in your code. We'll tell you what it would take to fix it.</p></div>
+      <a class="btn fill" href="contact.html">Contact us</a>
     </div>
     <p class="label" style="margin-top:28px">Also: <a href="dpd.html">Development Pattern Districting</a> &middot; <a href="design-studio.html">Regulatory Design Studio</a> &middot; <a href="equitable-zoning.html">Equitable zoning</a> &middot; <a href="coastal.html">Coastal zoning</a> &middot; <a href="development-consulting.html">Development consulting</a> &middot; <a href="zoning-verification.html">Zoning verification letters</a> &middot; <a href="services.html">All services &rarr;</a></p>
   </div>
