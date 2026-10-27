@@ -12,7 +12,7 @@ The site lives in the GitHub repository `azm1000/zoneco-website`. Netlify is lin
 
 ## Deploying
 
-**Netlify (current).** Linked to the GitHub repo; pushes to `main` deploy automatically. (Drag-and-drop of this folder onto the Netlify Deploys page also still works as a manual fallback.) `netlify.toml` sets caching headers, `_redirects` maps every old Squarespace URL (e.g. `/aboutzoneco`, `/sean-s-suder`, `/s/*.pdf`) to its new page so inbound links and search rankings carry over, and the three forms (contact, training booking, newsletter) work automatically through Netlify Forms with no extra setup. Point the `thezoneco.com` DNS at Netlify when ready.
+**Netlify (current).** Linked to the GitHub repo; pushes to `main` deploy automatically. (Drag-and-drop of this folder onto the Netlify Deploys page also still works as a manual fallback.) `netlify.toml` sets caching headers, `_redirects` maps every old Squarespace URL (e.g. `/aboutzoneco`, `/sean-s-suder`, `/s/*.pdf`) to its new page so inbound links and search rankings carry over, and the forms (contact, training booking, Equitable Zoning Scorecard, Code Lineage Report) work automatically through Netlify Forms with no extra setup. Point the `thezoneco.com` DNS at Netlify when ready.
 
 **Any other host (Cloudflare Pages, GitHub Pages, S3, a traditional web host).** Upload the folder. Recreate the redirects in `_redirects` using that host's redirect mechanism, and change the three `<form>` tags to post to a form service such as Formspree (replace `data-netlify="true"` with an `action` URL) or to your own handler.
 
