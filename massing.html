@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Massing Tool — ZoneCo</title>
+<meta name="description" content="Compare what two sets of zoning standards allow on the same lot. ZoneCo's massing tool draws the largest building each code permits, side by side in 3D, with floor area, units, parking, and FAR.">
+<meta property="og:title" content="Massing Tool — ZoneCo">
+<meta property="og:description" content="Compare what two sets of zoning standards allow on the same lot. ZoneCo's massing tool draws the largest building each code permits, side by side in 3D, with floor area, units, parking, and FAR.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.thezoneco.com/assets/img/rds-hero.jpg">
+<meta name="theme-color" content="#0E0F0D">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css?v=20261027">
+<link rel="canonical" href="https://www.thezoneco.com/massing.html">
+</head>
+<body>
+<header id="top-bar">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="ZoneCo home"><img class="logo" src="assets/img/logo.png" alt="ZoneCo"></a>
+    <button class="pill" id="menu-btn" aria-expanded="false" aria-controls="overlay"><span id="pill-label">Massing tool</span><i class="bars" aria-hidden="true"></i></button>
+  </div>
+  <div class="progress" aria-hidden="true"><i id="progress-bar"></i></div>
+</header>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="wrap overlay-in">
+    <div class="ov-col ov-nav">
+      <p class="label">Navigation</p>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About ZoneCo</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="where-we-work.html">Where we work</a>
+        <a href="team.html">Team</a>
+        <a href="speaking.html">Speaking</a>
+        <a href="news.html">News</a>
+        <a href="resources.html">Zoning resources</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="ov-small">
+        <a href="trainings.html">Board and commission trainings</a>
+        <a href="careers.html">Careers</a>
+        <a href="ideation-center.html">Ideation Center</a>
+        <a href="ohio-zoning-atlas.html">Ohio Zoning Atlas</a>
+        <a href="equity-scorecard.html">Free Equitable Zoning Scorecard</a>
+        <a href="terms.html">Terms of use</a>
+      </div>
+    </div>
+    <div class="ov-col ov-svc">
+      <p class="label">What we do</p>
+      <a href="zoning-codes.html"><i class="sq"></i>Zoning codes and subdivision ordinances<span>&rarr;</span></a>
+      <a href="diagnostics.html"><i class="sq"></i>Zoning diagnostics<span>&rarr;</span></a>
+      <a href="sign-codes.html"><i class="sq"></i>Sign codes<span>&rarr;</span></a>
+      <a href="historic-preservation.html"><i class="sq"></i>Historic preservation ordinances<span>&rarr;</span></a>
+      <a href="post-adoption.html"><i class="sq"></i>Post-adoption services<span>&rarr;</span></a>
+      <a href="on-call.html"><i class="sq"></i>On-call zoning services<span>&rarr;</span></a>
+      <a href="impact-mitigation.html"><i class="sq"></i>Impact mitigation and community benefits<span>&rarr;</span></a>
+      <a href="engagement.html"><i class="sq"></i>Engagement and education<span>&rarr;</span></a>
+      <a href="land-use-analytics.html"><i class="sq"></i>Land use and location analytics<span>&rarr;</span></a>
+      <p class="label" style="margin-top:40px">Contact</p>
+      <p class="ov-contact">1502 Vine Street, Fourth Floor<br>Cincinnati, Ohio 45202<br>(513) 235-3470<br><a href="mailto:ssuder@thezoneco.com">ssuder@thezoneco.com</a></p>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+<section class="page-hero short" data-name="Massing tool">
+  <div class="wrap">
+    <p class="label"><a href="about.html">Firm</a> <span class="sep">/</span> Massing tool</p>
+    <h1>What does your code actually allow?</h1>
+    <p class="lede">Set the lot and the zoning standards, and see the largest building two codes permit, side by side in 3D. Compare today&rsquo;s rules with a proposed change before anyone writes a word of the ordinance.</p>
+  </div>
+</section>
+
+<section class="band" id="massing">
+<style>
+#massing{--current:#005090;--proposed:#C98A1E;--ground:#DDE3DA;--lot:#CFD9C7;--street:#B3B8B5;--walk:#D4D7D3;--house:#BFC4BF;--roof:#9DA39E;--park:#8F9592;--surface:#FFFFFF;--muted:#6B6E66}
+#massing .ms-verdict{font-size:clamp(26px,3.6vw,44px);line-height:1.1;font-weight:500;letter-spacing:-.02em;margin:0 0 10px;max-width:24ch}
+#massing .ms-verdict .a{color:var(--current)} #massing .ms-verdict .b{color:var(--proposed)}
+#massing .ms-sub{color:var(--mute);margin:0 0 22px;max-width:70ch}
+#massing .ms-shared{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:18px}
+#massing .ms-field{display:flex;flex-direction:column;gap:3px;font-size:13px;color:var(--mute)}
+#massing .ms-field input{width:96px;font:inherit;font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);padding:6px 8px}
+#massing .ms-views{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+#massing button{font:inherit;font-size:14px;color:var(--ink);background:#fff;border:1px solid var(--line);padding:7px 12px;cursor:pointer;min-height:38px}
+#massing button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#massing .ms-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+#massing .ms-panel{background:#fff;border:1px solid var(--line);overflow:hidden}
+#massing .ms-head{display:flex;align-items:center;gap:10px;padding:12px 16px}
+#massing .ms-swatch{width:12px;height:12px;flex:none}
+#massing .ms-name{font:inherit;font-size:17px;font-weight:500;color:var(--ink);background:transparent;border:0;border-bottom:1px dashed transparent;padding:2px 0;width:100%}
+#massing .ms-name:hover{border-bottom-color:var(--line)}
+#massing .ms-stage{position:relative;aspect-ratio:4/3;background:var(--ground);touch-action:pan-y;cursor:grab}
+#massing .ms-stage:active{cursor:grabbing}
+#massing .ms-stage canvas{display:block;width:100%;height:100%}
+#massing .ms-stats{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line)}
+#massing .ms-stat{padding:12px 10px 12px 16px;border-right:1px solid var(--line)}
+#massing .ms-stat:nth-child(5){border-right:0}
+#massing .ms-stat b{display:block;font-size:20px;font-weight:500;line-height:1.15}
+#massing .ms-stat span{font-size:12px;color:var(--mute)}
+#massing details{border-top:1px solid var(--line)}
+#massing summary{padding:12px 16px;cursor:pointer;font-weight:500;font-size:14px}
+#massing .ms-form{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px 14px;padding:0 16px 16px}
+#massing .ms-form .ms-field input{width:100%}
+#massing .ms-warn{grid-column:1/-1;max-width:none;margin:0;padding:10px 16px;border-top:1px solid var(--line);font-size:13px;background:rgba(240,200,24,.16)}
+#massing .ms-legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--mute);margin-top:14px}
+#massing .ms-legend i{display:inline-block;width:18px;height:10px;margin-right:6px;vertical-align:middle}
+#massing .ms-note{font-size:13px;color:var(--mute);margin:14px 0 0;max-width:80ch}
+#massing .ms-reset{margin-top:14px}
+@media (max-width:860px){#massing .ms-grid{grid-template-columns:1fr}#massing .ms-views{margin-left:0}}
+@media (max-width:520px){#massing .ms-stats{grid-template-columns:repeat(3,1fr)}#massing .ms-stat:nth-child(3){border-right:0}#massing .ms-stat:nth-child(n+4){border-top:1px solid var(--line)}#massing .ms-stat:nth-child(5){border-right:1px solid var(--line)}}
+</style>
+  <div class="wrap">
+    <p class="ms-verdict" id="ms-verdict" aria-live="polite"></p>
+    <p class="ms-sub" id="ms-sub"></p>
+    <div class="ms-shared">
+      <label class="ms-field">Lot width (ft)<input type="number" id="ms-lotW" min="20" max="300" step="5"></label>
+      <label class="ms-field">Lot depth (ft)<input type="number" id="ms-lotD" min="50" max="400" step="5"></label>
+      <div class="ms-views" role="group" aria-label="Camera">
+        <button type="button" data-view="aerial" aria-pressed="true">Aerial</button>
+        <button type="button" data-view="street" aria-pressed="false">Street</button>
+        <button type="button" data-view="side" aria-pressed="false">Side</button>
+        <button type="button" id="ms-zin" aria-label="Zoom in">+</button>
+        <button type="button" id="ms-zout" aria-label="Zoom out">&minus;</button>
+      </div>
+    </div>
+    <div class="ms-grid">
+      <section class="ms-panel" id="ms-panel-a"></section>
+      <section class="ms-panel" id="ms-panel-b"></section>
+    </div>
+    <div class="ms-legend">
+      <span><i style="border:1.5px solid var(--mute)"></i>Zoning envelope (max allowed)</span>
+      <span><i style="background:var(--park)"></i>Required surface parking</span>
+      <span><i style="background:var(--house)"></i>Neighboring houses</span>
+    </div>
+    <p class="ms-note">Drag a model to rotate both views together. Rename either side and open &ldquo;Edit zoning standards&rdquo; to enter your own setbacks, height, units, and parking. Floor area is the largest building the setbacks, height, and stories allow, at 11 ft floor-to-floor. Parking is drawn in the rear as 9 &times; 18 ft stalls with a 24 ft aisle per two rows, reached by a 10 ft side driveway; the building shifts over to clear the driveway and gets shallower if parking needs the depth. An illustration, not a site plan or a zoning determination.</p>
+    <button type="button" class="ms-reset" id="ms-reset">Reset to defaults</button>
+    <noscript><p class="ms-note">The massing tool needs JavaScript.</p></noscript>
+  </div>
+</section>
+
+<section class="band cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Calibrate before you codify.</h2>
+      <p class="lede">ZoneCo models what your standards produce on real lots, then calibrates the code so it allows what the plan calls for.</p>
+    </div>
+    <div class="actions">
+      <a class="btn fill" href="contact.html">Contact ZoneCo</a>
+      <a class="btn" href="design-studio.html">Regulatory Design Studio</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="brand"><img class="logo" src="assets/img/logo.png" alt="ZoneCo"></div>
+        <p class="addr">ZoneCo, LLC<br>1502 Vine Street, Fourth Floor<br>Cincinnati, Ohio 45202<br>By appointment only</p>
+        <p class="addr" style="margin-top:14px"><a href="tel:+15132353470">(513) 235-3470</a><br><a href="mailto:ssuder@thezoneco.com">ssuder@thezoneco.com</a><br><a href="https://www.linkedin.com/company/thezoneco" rel="noopener">LinkedIn</a></p>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul><li><a href="about.html">About ZoneCo</a></li><li><a href="team.html">Team</a></li><li><a href="speaking.html">Speaking</a></li><li><a href="news.html">News</a></li><li><a href="careers.html">Careers</a></li><li><a href="ideation-center.html">Ideation Center</a></li><li><a href="contact.html">Contact</a></li></ul>
+      </div>
+      <div>
+        <h4>Work</h4>
+        <ul><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="where-we-work.html">Where we work</a></li><li><a href="trainings.html">Trainings</a></li><li><a href="resources.html">Zoning resources</a></li><li><a href="ohio-zoning-atlas.html">Ohio Zoning Atlas</a></li><li><a href="equity-scorecard.html">Equitable Zoning Scorecard</a></li></ul>
+      </div>
+      <div>
+        <h4>Partners</h4>
+        <ul><li><a href="https://www.generalcode.com" rel="noopener">ICC Code Solutions (code hosting)</a></li><li><a href="https://www.zoningatlas.org" rel="noopener">National Zoning Atlas</a></li><li><a href="https://www.ssuder.com/" rel="noopener">Suder, LLC</a></li><li><a href="https://www.planning.org" rel="noopener">American Planning Association</a></li><li><a href="https://www.cnu.org" rel="noopener">Congress for the New Urbanism</a></li></ul>
+      </div>
+      <div>
+        <h4>Political integrity policy</h4>
+        <p class="addr" style="font-size:13px">ZoneCo believes in fair, accessible, and transparent government for all. ZoneCo does not make contributions to any political party, campaign, or candidate. We would rather influence our leaders through the power of big ideas. <a href="about.html#integrity" style="border-bottom:1px solid var(--ochre)">Read the policy</a></p>
+      </div>
+    </div>
+    <div class="legal">
+      <p>Although some ZoneCo professionals are also attorneys who may be separately engaged to provide legal representation in states where we are licensed to practice law, ZoneCo is not a law firm. ZoneCo professionals do not provide legal representation or services and are not engaged in the practice of law in any jurisdiction. Engaging ZoneCo does not form an attorney-client relationship and, as such, the protections of the attorney-client relationship do not apply. If you wish to create an attorney-client relationship, you are encouraged to contact an attorney of your choosing.</p>
+      <div class="row">
+        <span>&copy; 2026 ZoneCo, LLC. All rights reserved. Map data &copy; OpenStreetMap contributors.</span>
+        <span><a href="terms.html">Terms of use</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/vendor/three-r128.min.js"></script>
+<script src="assets/js/massing.js?v=20261027"></script>
+<script src="assets/js/site.js?v=20260922c"></script>
+<script src="assets/js/map.js?v=20260921"></script>
+</body>
+</html>
