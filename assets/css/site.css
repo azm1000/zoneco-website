@@ -708,3 +708,7 @@ a.card:hover{box-shadow:0 8px 30px rgba(14,15,13,.08)}
 
   /* anything the scripts hide (news filters, portfolio search) stays hidden, whatever its display rule */
   [hidden]{display:none!important}
+/* Team photos: black and white, color on hover, focus, or tap */
+.people .ph,.person .ph{filter:grayscale(1);transition:filter .35s ease}
+.people a:hover .ph,.people a:focus-visible .ph,.people a:active .ph,.person:hover .ph,.person:focus-visible .ph,.person:active .ph{filter:none}
+@media (prefers-reduced-motion:reduce){.people .ph,.person .ph{transition:none}}
