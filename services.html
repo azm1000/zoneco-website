@@ -11,7 +11,7 @@
 <meta property="og:image" content="https://www.thezoneco.com/assets/img/services-hero.jpg">
 <meta name="theme-color" content="#0E0F0D">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/site.css?v=20261027">
+<link rel="stylesheet" href="assets/css/site.css?v=20261028">
 <link rel="canonical" href="https://www.thezoneco.com/services.html">
 </head>
 <body>
@@ -75,53 +75,141 @@
   </div>
 </section>
 
-<section class="band">
+<section class="band" id="core">
+<style>
+#core .flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink);margin-bottom:clamp(40px,5vw,64px)}
+#core .flow a{display:block;padding:18px 18px 4px 0;color:var(--ink)}
+#core .flow a+a{padding-left:18px;border-left:1px solid var(--line)}
+#core .flow b{display:flex;align-items:baseline;gap:10px;font-size:clamp(20px,2vw,26px);font-weight:500;letter-spacing:-.01em}
+#core .flow b i{font-style:normal;font-size:13px;font-weight:500;color:var(--mute);font-variant-numeric:tabular-nums}
+#core .flow span{display:block;font-size:14px;color:var(--mute);margin-top:6px;max-width:28ch}
+#core .flow a:hover b{color:var(--slate)}
+#core .flow em.plus{font-style:normal;font-weight:300}
+#core .ph{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,64px);padding:clamp(32px,4vw,48px) 0;border-top:1px solid var(--line);scroll-margin-top:90px}
+#core .ph-k{position:sticky;top:100px;align-self:start}
+#core .ph-n{display:flex;align-items:center;gap:14px;font-size:clamp(56px,7vw,96px);font-weight:500;line-height:.9;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+#core .ph-n .plus{font-weight:300;font-size:.7em;line-height:1}
+#core .ph h2{font-size:clamp(28px,3vw,40px);margin-top:14px}
+#core .ph-k p{color:var(--mute);margin-top:10px;max-width:30ch}
+#core .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#core .sv{display:flex;flex-direction:column;gap:14px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--c);padding:24px 24px 22px}
+#core .sv:only-child{grid-column:1/-1}
+#core .sv h3{font-size:20px;line-height:1.2}
+#core .sv h3 a{color:var(--ink)}
+#core .sv h3 a:hover{color:var(--slate)}
+#core .sv p{font-size:15px;color:#3a3c37}
+#core .sv .ex{font-size:13px;color:var(--mute);margin-top:auto}
+#core .sv .ex a{color:var(--ink);border-bottom:1px solid var(--c)}
+#core .sv .go{font-size:14px;font-weight:500;color:var(--slate)}
+#core .green{--c:var(--green)} #core .yellow{--c:var(--yellow)} #core .pink{--c:var(--pink)} #core .blue{--c:var(--blue)}
+#core .green .plus{color:var(--green)} #core .yellow .plus{color:var(--yellow)} #core .pink .plus{color:var(--pink)} #core .blue .plus{color:var(--blue)}
+@media (max-width:900px){#core .flow{grid-template-columns:repeat(2,minmax(0,1fr))}#core .flow a:nth-child(3){padding-left:0;border-left:0}#core .ph{grid-template-columns:1fr}#core .ph-k{position:static}}
+@media (max-width:600px){#core .cards{grid-template-columns:1fr}}
+</style>
   <div class="wrap">
     <div class="sec-head">
       <h2>Core services</h2>
       <p>Most engagements begin with a diagnostic and end with implementation support. The work in between is tailored to the community.</p>
     </div>
-    <div class="services">
-      <a class="svc" href="zoning-codes.html">
-        <div><h3>Zoning codes and subdivision ordinances</h3><p>Full rewrites, targeted amendments, unified development codes, and subdivision regulations.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="diagnostics.html">
-        <div><h3>Zoning diagnostics</h3><p>A plain-language report on what your code says, how it performs, and what to fix first.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="sign-codes.html">
-        <div><h3>Sign codes</h3><p>Content-neutral, graphically rich sign regulations that meet current constitutional standards.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="historic-preservation.html">
-        <div><h3>Historic preservation ordinances and guidelines</h3><p>Preservation frameworks that protect character while remaining workable for owners.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="post-adoption.html">
-        <div><h3>Post-adoption services</h3><p>Staff training, transition memos, digital code formats, and maintenance after adoption.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="trainings.html">
-        <div><h3>Board and commission trainings</h3><p>Two- to four-hour sessions for planning commissions, zoning boards, and elected officials.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="on-call.html">
-        <div><h3>On-call zoning services</h3><p>As-needed zoning capacity for communities without it in-house.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="impact-mitigation.html">
-        <div><h3>Impact mitigation and community benefits</h3><p>Review frameworks for large projects, including data centers and energy facilities.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="engagement.html">
-        <div><h3>Engagement and education</h3><p>Stakeholder committees, focus groups, open houses, and public hearings, planned for your community.</p></div>
-        <span class="go">Learn more</span>
-      </a>
-      <a class="svc" href="land-use-analytics.html">
-        <div><h3>Land use and location analytics</h3><p>Market, feasibility, and site analysis, delivered as maps and dashboards anyone can use.</p></div>
-        <span class="go">Learn more</span>
-      </a>
+    <nav class="flow" aria-label="Stages of a ZoneCo engagement">
+      <a class="green" href="#diagnose"><b><i>01</i>Diagnose<em class="plus" aria-hidden="true">+</em></b><span>Find out what your code says, how it performs, and what to fix first.</span></a>
+      <a class="yellow" href="#write"><b><i>02</i>Write<em class="plus" aria-hidden="true">+</em></b><span>Draft the regulations: a whole new code, or the parts that need it.</span></a>
+      <a class="pink" href="#engage"><b><i>03</i>Engage<em class="plus" aria-hidden="true">+</em></b><span>Bring residents, boards, and officials along at every step.</span></a>
+      <a class="blue" href="#sustain"><b><i>04</i>Sustain<em class="plus" aria-hidden="true">+</em></b><span>Keep the code working after adoption, with help when you need it.</span></a>
+    </nav>
+    <div class="ph green" id="diagnose">
+      <div class="ph-k">
+        <div class="ph-n">01<span class="plus" aria-hidden="true">+</span></div>
+        <h2>Diagnose</h2>
+        <p>Find out what your code says, how it performs, and what to fix first.</p>
+      </div>
+      <div class="cards">
+        <div class="sv">
+          <h3><a href="diagnostics.html">Zoning diagnostics</a></h3>
+          <p>A plain-language report on what your code says, how it performs, and what to fix first.</p>
+          <p class="ex">Recent work: <a href="project-powell.html">Powell</a>, <a href="project-minnetonka.html">Minnetonka</a>, <a href="project-university-city.html">University City</a></p>
+          <a class="go" href="diagnostics.html">Learn more &rarr;</a>
+        </div>
+        <div class="sv">
+          <h3><a href="land-use-analytics.html">Land use and location analytics</a></h3>
+          <p>Market, feasibility, and site analysis, delivered as maps and dashboards anyone can use.</p>
+          <a class="go" href="land-use-analytics.html">Learn more &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="ph yellow" id="write">
+      <div class="ph-k">
+        <div class="ph-n">02<span class="plus" aria-hidden="true">+</span></div>
+        <h2>Write</h2>
+        <p>Draft the regulations: a whole new code, or the parts that need it.</p>
+      </div>
+      <div class="cards">
+        <div class="sv">
+          <h3><a href="zoning-codes.html">Zoning codes and subdivision ordinances</a></h3>
+          <p>Full rewrites, targeted amendments, unified development codes, and subdivision regulations.</p>
+          <p class="ex">Recent work: <a href="project-danville.html">Danville</a>, <a href="project-gaithersburg.html">Gaithersburg</a>, <a href="project-rockville.html">Rockville</a></p>
+          <a class="go" href="zoning-codes.html">Learn more &rarr;</a>
+        </div>
+        <div class="sv">
+          <h3><a href="sign-codes.html">Sign codes</a></h3>
+          <p>Content-neutral, graphically rich sign regulations that meet current constitutional standards.</p>
+          <p class="ex">Recent work: <a href="project-dunwoody.html">Dunwoody</a>, <a href="project-marysville.html">Marysville</a>, <a href="project-murfreesboro.html">Murfreesboro</a></p>
+          <a class="go" href="sign-codes.html">Learn more &rarr;</a>
+        </div>
+        <div class="sv">
+          <h3><a href="historic-preservation.html">Historic preservation ordinances and guidelines</a></h3>
+          <p>Preservation frameworks that protect character while remaining workable for owners.</p>
+          <p class="ex">Recent work: <a href="project-cincinnati.html">Cincinnati</a>, <a href="project-burlington.html">Burlington</a>, <a href="project-centerville.html">Centerville</a></p>
+          <a class="go" href="historic-preservation.html">Learn more &rarr;</a>
+        </div>
+        <div class="sv">
+          <h3><a href="impact-mitigation.html">Impact mitigation and community benefits</a></h3>
+          <p>Review frameworks for large projects, including data centers and energy facilities.</p>
+          <p class="ex">Recent work: <a href="project-boston.html">Boston</a></p>
+          <a class="go" href="impact-mitigation.html">Learn more &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="ph pink" id="engage">
+      <div class="ph-k">
+        <div class="ph-n">03<span class="plus" aria-hidden="true">+</span></div>
+        <h2>Engage</h2>
+        <p>Bring residents, boards, and officials along at every step.</p>
+      </div>
+      <div class="cards">
+        <div class="sv">
+          <h3><a href="engagement.html">Engagement and education</a></h3>
+          <p>Stakeholder committees, focus groups, open houses, and public hearings, planned for your community.</p>
+          <p class="ex">Recent work: <a href="project-pike-with-a-purpose.html">Pike with a Purpose</a>, <a href="project-glen-ellyn.html">Glen Ellyn</a></p>
+          <a class="go" href="engagement.html">Learn more &rarr;</a>
+        </div>
+        <div class="sv">
+          <h3><a href="trainings.html">Board and commission trainings</a></h3>
+          <p>Two- to four-hour sessions for planning commissions, zoning boards, and elected officials.</p>
+          <p class="ex">Recent work: <a href="project-fairborn-oh.html">Fairborn</a></p>
+          <a class="go" href="trainings.html">Learn more &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="ph blue" id="sustain">
+      <div class="ph-k">
+        <div class="ph-n">04<span class="plus" aria-hidden="true">+</span></div>
+        <h2>Sustain</h2>
+        <p>Keep the code working after adoption, with help when you need it.</p>
+      </div>
+      <div class="cards">
+        <div class="sv">
+          <h3><a href="post-adoption.html">Post-adoption services</a></h3>
+          <p>Staff training, transition memos, digital code formats, and maintenance after adoption.</p>
+          <a class="go" href="post-adoption.html">Learn more &rarr;</a>
+        </div>
+        <div class="sv">
+          <h3><a href="on-call.html">On-call zoning services</a></h3>
+          <p>As-needed zoning capacity for communities without it in-house.</p>
+          <p class="ex">Recent work: <a href="project-onondaga-county-ny.html">Onondaga County</a></p>
+          <a class="go" href="on-call.html">Learn more &rarr;</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -205,10 +293,6 @@
       <div>
         <h4>Work</h4>
         <ul><li><a href="services.html">Services</a></li><li><a href="projects.html">Projects</a></li><li><a href="where-we-work.html">Where we work</a></li><li><a href="trainings.html">Trainings</a></li><li><a href="resources.html">Zoning resources</a></li><li><a href="ohio-zoning-atlas.html">Ohio Zoning Atlas</a></li><li><a href="equity-scorecard.html">Equitable Zoning Scorecard</a></li></ul>
-      </div>
-      <div>
-        <h4>Partners</h4>
-        <ul><li><a href="https://www.generalcode.com" rel="noopener">ICC Code Solutions (code hosting)</a></li><li><a href="https://www.zoningatlas.org" rel="noopener">National Zoning Atlas</a></li><li><a href="https://www.ssuder.com/" rel="noopener">Suder, LLC</a></li><li><a href="https://www.planning.org" rel="noopener">American Planning Association</a></li><li><a href="https://www.cnu.org" rel="noopener">Congress for the New Urbanism</a></li></ul>
       </div>
       <div>
         <h4>Political integrity policy</h4>
