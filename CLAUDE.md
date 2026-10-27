@@ -13,13 +13,13 @@ This site belongs to ZoneCo. Its owner, Sean Suder, is a zoning lawyer, not a de
 - Anything that needs Josh (hosting, domain, forms, something that looks broken for a technical reason): say so plainly and suggest he email Josh, rather than attempting infrastructure changes.
 
 
-This is ZoneCo's new static website: 146 flat HTML pages at the root, one stylesheet (`assets/css/site.css`), two scripts, self-hosted fonts and images. There is no build step and no generator here; edit the HTML/CSS/asset files directly. The site opens from disk (`index.html`), so verify changes by rendering pages, not just by reading the diff.
+This is ZoneCo's new static website: 145 flat HTML pages at the root, one stylesheet (`assets/css/site.css`), two scripts, self-hosted fonts and images. There is no build step and no generator here; edit the HTML/CSS/asset files directly. The site opens from disk (`index.html`), so verify changes by rendering pages, not just by reading the diff.
 
 Read `README.md` before making changes; it documents the logo mechanism, the color variables, and the deploy setup. `START HERE - Sean.md` is the owner's plain-English guide and describes what he is likely asking for.
 
 ## Logo swaps
 
-- The logo is one file, `assets/img/logo.png` (ZONECO ++++ wordmark, white), shown at `--logo-height` (32px) in the header and footer of every page. Replace the file rather than editing 146 pages. If the replacement is an SVG, name it `logo.svg` and update the `src` on every page with a scripted find-and-replace, never by hand.
+- The logo is one file, `assets/img/logo.png` (ZONECO ++++ wordmark, white), shown at `--logo-height` (32px) in the header and footer of every page. Replace the file rather than editing 145 pages. If the replacement is an SVG, name it `logo.svg` and update the `src` on every page with a scripted find-and-replace, never by hand.
 - Header and footer are dark. Use the reversed/white logo. Trim transparent margins. Wordmarks with a tagline need either the no-tagline version or a larger `--logo-height` (max ~40px).
 - Also replace `assets/img/favicon.svg` with a square version of the new mark.
 - Raw logo files live in `brand-source/` (web pull from thezoneco.com, plus any originals the owner adds). Prefer vector originals (`.ai`, `.eps`, `.pdf`, `.svg`) over the web PNG; convert to SVG or a large transparent PNG as needed.
@@ -27,11 +27,11 @@ Read `README.md` before making changes; it documents the logo mechanism, the col
 
 ## Site-wide edits
 
-Header and footer markup is duplicated verbatim in all 146 site pages (every `*.html` except `studio.html`, a standalone tool page, `scorecard-report-sample.html`, the standalone Equitable Zoning Scorecard results-page sample, and `lineage-report-sample.html`, the standalone Code Lineage Report sample). Any change to them must be applied to every file with a script, and the count of replacements should equal 146 (or 292 for elements that appear in both header and footer). Assert that before saving.
+Header and footer markup is duplicated verbatim in all 145 site pages (every `*.html` except `studio.html`, a standalone tool page, `scorecard-report-sample.html`, the standalone Equitable Zoning Scorecard results-page sample, and `lineage-report-sample.html`, the standalone Code Lineage Report sample). Any change to them must be applied to every file with a script, and the count of replacements should equal 145 (or 290 for elements that appear in both header and footer). Assert that before saving.
 
 ## Community posters
 
-Every community on `where-we-work.html` has a poster (`assets/img/posters/poster-<slug>.jpg`, 800 px, and `-sm.jpg`, 400 px), rendered from the "ZoneCo Community Posters" design canvas. The Projects page `#communities` grid shows all of them, each linking to that community's project page. 35 communities have a full case study (`project-<name>.html`); the other 70 have a poster page (`project-<name>-<state>.html`) with the poster, the scope from the portfolio, related services, and links to the rest of the region. When a poster page gains real project details, write them into that page rather than creating a new one.
+Every community ZoneCo has served has a poster (`assets/img/posters/poster-<slug>.jpg`, 800 px, and `-sm.jpg`, 400 px), rendered from the "ZoneCo Community Posters" design canvas. The Projects page `#communities` grid shows all of them, each linking to that community's project page. 35 communities have a full case study (`project-<name>.html`); the other 70 have a poster page (`project-<name>-<state>.html`) with the poster, the scope from the portfolio, related services, and links to the rest of the region. When a poster page gains real project details, write them into that page rather than creating a new one.
 
 ## News
 
@@ -39,7 +39,7 @@ The home page "Latest from ZoneCo" section (`#latest` in `index.html`) repeats t
 
 ## Cache busting
 
-Assets are served with a one-year immutable cache (netlify.toml). After editing `assets/css/site.css`, `assets/js/site.js`, or `assets/js/map.js`, change the `?v=` value on their tags in every page (scripted replace across `*.html`, assert 146, plus the stylesheet tag in `scorecard-report-sample.html` and `lineage-report-sample.html`). Give changed images new file names rather than overwriting. `resources.html` alone also loads `assets/js/vendor/d3-7.9.0.min.js` (D3, versioned by file name), `assets/js/zoning-spread-data.js` and `assets/js/zoning-spread.js` for the "How zoning spread" map, and `assets/js/zoning-lineage.js` for the "Ordinance lineage" comparison; bump their `?v=` on that page when you edit them. `massing.html` alone loads `assets/js/vendor/three-r128.min.js` (Three.js, versioned by file name) and `assets/js/massing.js`; bump the latter's `?v=` when you edit it.
+Assets are served with a one-year immutable cache (netlify.toml). After editing `assets/css/site.css`, `assets/js/site.js`, or `assets/js/map.js`, change the `?v=` value on their tags in every page (scripted replace across `*.html`, assert 145, plus the stylesheet tag in `scorecard-report-sample.html` and `lineage-report-sample.html`). Give changed images new file names rather than overwriting. `resources.html` alone also loads `assets/js/vendor/d3-7.9.0.min.js` (D3, versioned by file name), `assets/js/zoning-spread-data.js` and `assets/js/zoning-spread.js` for the "How zoning spread" map, and `assets/js/zoning-lineage.js` for the "Ordinance lineage" comparison; bump their `?v=` on that page when you edit them. `massing.html` alone loads `assets/js/vendor/three-r128.min.js` (Three.js, versioned by file name) and `assets/js/massing.js`; bump the latter's `?v=` when you edit it.
 
 ## Do not
 
