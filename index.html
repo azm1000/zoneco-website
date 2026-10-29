@@ -426,21 +426,146 @@
 
 <!-- TEAM -->
 <section class="band dark" id="team" data-name="Team">
+<style>
+#team .crew{display:flex;gap:10px;height:clamp(520px,58vw,640px)}
+#team .mate{position:relative;flex:1 1 0;min-width:0;overflow:hidden;background:var(--ink-2);transition:flex-grow .55s cubic-bezier(.3,.7,.2,1)}
+#team .mate.is-on{flex-grow:5.2}
+#team .mate-ph{position:absolute;inset:0;background-size:cover;background-position:var(--pos);filter:grayscale(1) contrast(1.05);transition:filter .5s ease,transform .8s ease}
+#team .mate.is-on .mate-ph{filter:none;transform:scale(1.02)}
+#team .mate::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,13,0) 35%,rgba(14,15,13,.55) 62%,rgba(14,15,13,.94) 100%);pointer-events:none}
+#team .mate-tab{position:absolute;inset:0;z-index:2;width:100%;background:none;border:0;color:var(--paper);cursor:pointer;text-align:left;padding:0;font:inherit}
+#team .mate-tab:focus-visible{outline:2px solid var(--yellow);outline-offset:-4px}
+#team .mate-tab .vt{position:absolute;left:50%;bottom:22px;transform:translateX(-50%) rotate(180deg);writing-mode:vertical-rl;white-space:nowrap;font-size:17px;font-weight:500;letter-spacing:.01em;transition:opacity .25s}
+#team .mate-tab .vt i{font-style:normal;color:var(--c);margin-bottom:8px;display:inline-block;transform:rotate(90deg)}
+#team .mate.is-on .mate-tab{pointer-events:none}
+#team .mate.is-on .mate-tab .vt{opacity:0}
+#team .mate-info{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:clamp(22px,3vw,36px);opacity:0;transform:translateY(14px);transition:opacity .35s ease .15s,transform .45s ease .15s;pointer-events:none;max-width:640px}
+#team .mate.is-on .mate-info{opacity:1;transform:none;pointer-events:auto}
+#team .mate-info .r{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--sage)}
+#team .mate-info h3{font-size:clamp(30px,3.2vw,46px);line-height:1.02;letter-spacing:-.02em;margin-top:8px}
+#team .mate-info h3 small{font-size:.42em;font-weight:400;color:var(--sage);letter-spacing:0;margin-left:6px}
+#team .mate-info h3 .plus{color:var(--c);font-weight:300}
+#team .mate-info .q{font-size:17px;line-height:1.45;margin-top:10px;max-width:46ch;color:var(--paper)}
+#team .facts3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line-dark)}
+#team .facts3 b{display:block;font-size:clamp(20px,2vw,26px);font-weight:500;color:var(--c);line-height:1.1}
+#team .facts3 span{display:block;font-size:12.5px;color:var(--sage);margin-top:4px;line-height:1.35}
+#team .mate-foot{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:baseline;margin-top:18px;font-size:14px}
+#team .mate-foot .w{color:var(--sage)}
+#team .mate-foot .w a{color:var(--paper);border-bottom:1px solid var(--c)}
+#team .mate-foot .bio{color:var(--yellow);font-weight:500}
+#team .green{--c:var(--green)} #team .yellow{--c:var(--yellow)} #team .pink{--c:var(--pink)} #team .blue{--c:#4F9BDB}
+@media (max-width:900px){
+  #team .crew{height:auto;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+  #team .mate,#team .mate.is-on{flex:0 0 84%;display:flex;flex-direction:column;scroll-snap-align:start;background:var(--ink-2);border:1px solid var(--line-dark)}
+  #team .mate::after{display:none}
+  #team .mate-ph{position:relative;inset:auto;height:300px;flex:none;filter:none;transform:none}
+  #team .mate.is-on .mate-ph{transform:none}
+  #team .mate-tab{display:none}
+  #team .mate-info{position:relative;opacity:1;transform:none;pointer-events:auto;padding:20px 20px 22px}
+  #team .facts3{grid-template-columns:1fr;gap:8px;margin-top:16px;padding-top:14px}
+  #team .facts3 div{display:flex;gap:12px;align-items:baseline}
+  #team .facts3 b{flex:0 0 96px;font-size:19px}
+  #team .facts3 span{margin-top:0}
+}
+@media (prefers-reduced-motion:reduce){#team .mate,#team .mate-ph,#team .mate-info,#team .mate-tab .vt{transition:none}}
+</style>
   <div class="wrap">
     <div class="team-head">
-      <h2>The ZoneCo team</h2>
-      <p class="lede" style="max-width:46ch">Lawyers, city planners, urban designers, and historic preservationists, all with significant local government experience.</p>
+      <h2>Meet our people</h2>
+      <p class="lede" style="max-width:46ch">Lawyers, city planners, urban designers, and historic preservationists, all with significant local government experience. The people who write your code are the people you meet.</p>
     </div>
-    <div class="team">
-      <a class="person" href="sean-suder.html"><div class="ph" style="background-image:url(assets/img/team-sean.jpg)"></div><div><b>Sean S. Suder, Esq., LEED AP</b><span>CEO and Founder</span></div></a>
-      <a class="person" href="jocelyn-gibson.html"><div class="ph" style="background-image:url(assets/img/team-jocelyn.jpg)"></div><div><b>Jocelyn Gibson, MCP</b><span>Lead Principal / Code Consultant</span></div></a>
-      <a class="person" href="todd-kinskey.html"><div class="ph" style="background-image:url(assets/img/team-todd.jpg)"></div><div><b>Todd Kinskey, FAICP</b><span>Senior City Planner / Code Consultant</span></div></a>
-      <a class="person" href="teresa-bamberger.html"><div class="ph" style="background-image:url(assets/img/team-teresa.jpg)"></div><div><b>Teresa Bamberger, Esq., AICP</b><span>Senior City Planner / Code Consultant</span></div></a>
-      <a class="person" href="michael-stein.html"><div class="ph" style="background-image:url(assets/img/team-michael.jpg)"></div><div><b>Michael Stein</b><span>Code Consultant</span></div></a>
-      <a class="person" href="jp-burleigh.html"><div class="ph" style="background-image:url(assets/img/team-jp.jpg)"></div><div><b>J.P. Burleigh, Esq.</b><span>Firm Legal Counsel / Code Consultant</span></div></a>
+    <div class="crew" data-crew>
+      <div class="mate yellow is-on" style="--pos:38% 30%">
+        <div class="mate-ph" style="background-image:url(assets/img/team-sean.jpg)" role="img" aria-label="Sean S. Suder, Esq., LEED AP"></div>
+        <button class="mate-tab" type="button" aria-expanded="true" aria-controls="mate-sean-suder"><span class="vt"><i>+</i>Sean S. Suder</span></button>
+        <div class="mate-info" id="mate-sean-suder">
+          <p class="r">CEO and Founder</p>
+          <h3>Sean S. Suder<span class="plus" aria-hidden="true"> +</span><small>Esq., LEED AP</small></h3>
+          <p class="q">Lawyer. City planner. Leading zoning historian.</p>
+          <div class="facts3"><div><b>100+</b><span>communities served since 2014</span></div><div><b>Band 1</b><span>Chambers USA, Zoning and Land Use, 2019 to 2026</span></div><div><b>Former</b><span>Chief Counsel of Land Use and Planning, City of Cincinnati</span></div></div>
+          <p class="mate-foot"><span class="w">Recent work: <a href="project-cincinnati.html">Cincinnati</a>, <a href="project-danville.html">Danville</a>, <a href="project-powell.html">Powell</a></span><a class="bio" href="sean-suder.html">Read Sean&rsquo;s bio &rarr;</a></p>
+        </div>
+      </div>
+      <div class="mate green" style="--pos:50% 22%">
+        <div class="mate-ph" style="background-image:url(assets/img/team-jocelyn.jpg)" role="img" aria-label="Jocelyn Gibson, MCP"></div>
+        <button class="mate-tab" type="button" aria-expanded="false" aria-controls="mate-jocelyn-gibson"><span class="vt"><i>+</i>Jocelyn Gibson</span></button>
+        <div class="mate-info" id="mate-jocelyn-gibson">
+          <p class="r">Lead Principal / Code Consultant</p>
+          <h3>Jocelyn Gibson<span class="plus" aria-hidden="true"> +</span><small>MCP</small></h3>
+          <p class="q">City planner. Project lead. Head of the firm’s business development.</p>
+          <div class="facts3"><div><b>Since 2020</b><span>managing ZoneCo code projects, from Rockville to Webster Groves</span></div><div><b>CNU</b><span>National Board, 2021 to 2023</span></div><div><b>Co-founder</b><span>CNU Midwest</span></div></div>
+          <p class="mate-foot"><span class="w">Recent work: <a href="project-rockville.html">Rockville</a>, <a href="project-webster-groves.html">Webster Groves</a></span><a class="bio" href="jocelyn-gibson.html">Read Jocelyn&rsquo;s bio &rarr;</a></p>
+        </div>
+      </div>
+      <div class="mate pink" style="--pos:50% 25%">
+        <div class="mate-ph" style="background-image:url(assets/img/team-todd.jpg)" role="img" aria-label="Todd Kinskey, FAICP"></div>
+        <button class="mate-tab" type="button" aria-expanded="false" aria-controls="mate-todd-kinskey"><span class="vt"><i>+</i>Todd Kinskey</span></button>
+        <div class="mate-info" id="mate-todd-kinskey">
+          <p class="r">Senior City Planner / Code Consultant</p>
+          <h3>Todd Kinskey<span class="plus" aria-hidden="true"> +</span><small>FAICP</small></h3>
+          <p class="q">Three decades of local government planning, zoning, subdivision, and housing policy.</p>
+          <div class="facts3"><div><b>30+</b><span>years in local government planning</span></div><div><b>FAICP</b><span>AICP College of Fellows, 2020</span></div><div><b>Former</b><span>Planning Director, City of Dayton</span></div></div>
+          <p class="mate-foot"><span class="w">Recent work: <a href="project-beavercreek-oh.html">Beavercreek</a></span><a class="bio" href="todd-kinskey.html">Read Todd&rsquo;s bio &rarr;</a></p>
+        </div>
+      </div>
+      <div class="mate blue" style="--pos:30% 30%">
+        <div class="mate-ph" style="background-image:url(assets/img/team-teresa.jpg)" role="img" aria-label="Teresa Bamberger, Esq., AICP"></div>
+        <button class="mate-tab" type="button" aria-expanded="false" aria-controls="mate-teresa-bamberger"><span class="vt"><i>+</i>Teresa Bamberger</span></button>
+        <div class="mate-info" id="mate-teresa-bamberger">
+          <p class="r">Senior City Planner / Code Consultant</p>
+          <h3>Teresa Bamberger<span class="plus" aria-hidden="true"> +</span><small>Esq., AICP</small></h3>
+          <p class="q">Architect by training, town planner, civil engineering project manager, and land use lawyer.</p>
+          <div class="facts3"><div><b>4</b><span>careers on every side of the development process</span></div><div><b>100+</b><span>clients in eminent domain and takings matters</span></div><div><b>AICP</b><span>and licensed Ohio attorney</span></div></div>
+          <p class="mate-foot"><a class="bio" href="teresa-bamberger.html">Read Teresa&rsquo;s bio &rarr;</a></p>
+        </div>
+      </div>
+      <div class="mate yellow" style="--pos:50% 22%">
+        <div class="mate-ph" style="background-image:url(assets/img/team-michael.jpg)" role="img" aria-label="Michael Stein"></div>
+        <button class="mate-tab" type="button" aria-expanded="false" aria-controls="mate-michael-stein"><span class="vt"><i>+</i>Michael Stein</span></button>
+        <div class="mate-info" id="mate-michael-stein">
+          <p class="r">Code Consultant</p>
+          <h3>Michael Stein<span class="plus" aria-hidden="true"> +</span></h3>
+          <p class="q">A strong attention to detail and a love of writing, at the drafting table where a code is won or lost.</p>
+          <div class="facts3"><div><b>5</b><span>states of code rewrites: VA, MD, MN, WI, OH</span></div><div><b>2026</b><span>Rockville, Maryland zoning ordinance</span></div><div><b>D.C.</b><span>based, serving the National Capital Region</span></div></div>
+          <p class="mate-foot"><span class="w">Recent work: <a href="project-rockville.html">Rockville</a></span><a class="bio" href="michael-stein.html">Read Michael&rsquo;s bio &rarr;</a></p>
+        </div>
+      </div>
+      <div class="mate green" style="--pos:56% 28%">
+        <div class="mate-ph" style="background-image:url(assets/img/team-jp.jpg)" role="img" aria-label="J.P. Burleigh, Esq."></div>
+        <button class="mate-tab" type="button" aria-expanded="false" aria-controls="mate-jp-burleigh"><span class="vt"><i>+</i>J.P. Burleigh</span></button>
+        <div class="mate-info" id="mate-jp-burleigh">
+          <p class="r">Firm Legal Counsel / Code Consultant</p>
+          <h3>J.P. Burleigh<span class="plus" aria-hidden="true"> +</span><small>Esq.</small></h3>
+          <p class="q">A lawyer who lives and breathes real property law.</p>
+          <div class="facts3"><div><b>Counsel</b><span>in-house to ZoneCo, attorney with Suder, LLC</span></div><div><b>Codes</b><span>read the way they will be applied and challenged</span></div><div><b>2026</b><span>profiled in the Cincinnati Bar Association’s CBA Report</span></div></div>
+          <p class="mate-foot"><a class="bio" href="jp-burleigh.html">Read J.P.&rsquo;s bio &rarr;</a></p>
+        </div>
+      </div>
     </div>
-    <p style="margin-top:28px"><a class="btn" href="team.html">Meet the team</a></p>
+    <p style="margin-top:28px"><a class="btn" href="team.html">Meet the whole team</a></p>
   </div>
+<script>
+(function(){
+  var crew=document.querySelector('[data-crew]'); if(!crew) return;
+  var mates=[].slice.call(crew.querySelectorAll('.mate')), cur=0, timer=null, stopped=false, hoverT=null;
+  var wide=matchMedia('(min-width:901px)'), still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function open(i){ cur=i; mates.forEach(function(m,k){ m.classList.toggle('is-on',k===i); m.querySelector('.mate-tab').setAttribute('aria-expanded',k===i?'true':'false'); }); }
+  function stop(){ stopped=true; if(timer){clearInterval(timer);timer=null;} }
+  mates.forEach(function(m,i){
+    var tab=m.querySelector('.mate-tab');
+    tab.addEventListener('click',function(){ stop(); open(i); });
+    m.addEventListener('mouseenter',function(){ if(!wide.matches) return; stop(); clearTimeout(hoverT); hoverT=setTimeout(function(){open(i);},90); });
+    m.addEventListener('mouseleave',function(){ clearTimeout(hoverT); });
+  });
+  crew.addEventListener('focusin',stop);
+  if(!still && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting && !stopped && !timer && wide.matches){ timer=setInterval(function(){ open((cur+1)%mates.length); },6000); }
+      else if(!e.isIntersecting && timer){ clearInterval(timer); timer=null; }
+    }); },{threshold:.5}).observe(crew);
+  }
+})();
+</script>
 </section>
 
 <!-- SPOTLIGHT -->
