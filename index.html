@@ -573,38 +573,166 @@
 
 <!-- SPOTLIGHT -->
 <section class="band" id="spotlight" data-name="Projects">
+<style>
+#spotlight .mg{position:relative;background:var(--ink);color:var(--paper);overflow:hidden}
+#spotlight .mg-stage{position:relative;height:clamp(460px,48vw,600px)}
+#spotlight .mg-slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s .7s}
+#spotlight .mg-slide.is-on{opacity:1;visibility:visible;transition:opacity .7s ease}
+#spotlight .mg-img{background-size:cover;background-position:center;transform:scale(1.06);transition:transform 7s linear}
+#spotlight .mg-slide.is-on .mg-img{transform:scale(1)}
+#spotlight .mg-txt{display:flex;flex-direction:column;justify-content:center;gap:14px;padding:clamp(28px,4vw,56px)}
+#spotlight .mg-place{font-size:13px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--yellow)}
+#spotlight .mg-txt h3{font-size:clamp(28px,3.2vw,44px);line-height:1.05;letter-spacing:-.02em}
+#spotlight .mg-desc{color:#D9DCD0;font-size:16px;line-height:1.55}
+#spotlight .mg-stat{border-top:1px solid var(--line-dark);padding-top:14px;margin-top:4px}
+#spotlight .mg-stat b{display:block;font-size:clamp(40px,4.4vw,60px);font-weight:500;line-height:1;letter-spacing:-.03em;color:var(--yellow)}
+#spotlight .mg-stat span{display:block;font-size:14px;color:#D9DCD0;margin-top:6px}
+#spotlight .mg-txt .btn{align-self:flex-start;margin-top:6px;background:var(--yellow);border:1px solid var(--yellow);color:var(--ink)}
+#spotlight .mg-txt .btn:hover{background:var(--paper);border-color:var(--paper)}
+#spotlight .mg-thumbs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;background:var(--line-dark);border-top:1px solid var(--line-dark)}
+#spotlight .mg-th{font:inherit;position:relative;height:74px;border:0;padding:0;cursor:pointer;background:var(--ink);overflow:hidden}
+#spotlight .mg-th em{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(1) brightness(.45);transition:filter .3s}
+#spotlight .mg-th span{position:absolute;left:12px;bottom:12px;font:inherit;font-size:13px;font-weight:600;color:var(--paper);text-shadow:0 1px 6px rgba(14,15,13,.9)}
+#spotlight .mg-th i{position:absolute;left:0;right:0;top:0;height:3px;background:var(--yellow);transform:scaleX(0);transform-origin:left}
+#spotlight .mg-th:hover em,#spotlight .mg-th:focus-visible em{filter:grayscale(.3) brightness(.7)}
+#spotlight .mg-th.is-on em{filter:brightness(.85)}
+#spotlight .mg-th.is-on i{transform:scaleX(var(--p,0))}
+#spotlight .mg-th:focus-visible{outline:2px solid var(--yellow);outline-offset:-2px}
+#spotlight .deal{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,72px);align-items:center;margin-top:clamp(40px,5vw,64px);padding:clamp(24px,3vw,40px);background:#fff;border:1px solid var(--line)}
+#spotlight .deal h3{font-size:clamp(26px,2.8vw,38px);line-height:1.1}
+#spotlight .deal p{color:var(--mute);margin-top:10px;max-width:46ch}
+#spotlight .deal-who{margin-top:22px;min-height:64px}
+#spotlight .deal-who b{display:block;font-size:22px;font-weight:500}
+#spotlight .deal-who span{display:block;color:var(--mute);font-size:15px;margin-top:2px}
+#spotlight .deal-who a{display:inline-block;margin-top:8px;font-weight:500;color:var(--slate)}
+#spotlight .deal-btn{margin-top:22px;font:inherit;font-size:15px;font-weight:500;background:var(--ink);color:var(--paper);border:0;padding:13px 20px;cursor:pointer}
+#spotlight .deal-btn:hover{background:var(--blue)}
+#spotlight .deal-card{width:clamp(180px,20vw,240px);aspect-ratio:400/618;perspective:1200px}
+#spotlight .deal-in{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+#spotlight .deal-in.flip{transform:rotateY(180deg)}
+#spotlight .deal-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:block;box-shadow:0 18px 40px -22px rgba(14,15,13,.55)}
+#spotlight .deal-face img{display:block;width:100%;height:100%;object-fit:cover}
+#spotlight .deal-back{transform:rotateY(180deg)}
+@media (max-width:900px){
+  #spotlight .mg-stage{height:auto}
+  #spotlight .mg-slide{position:relative;inset:auto;grid-template-columns:1fr;display:none}
+  #spotlight .mg-slide.is-on{display:grid}
+  #spotlight .mg-img{height:240px}
+  #spotlight .mg-thumbs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #spotlight .deal{grid-template-columns:1fr}
+  #spotlight .deal-card{justify-self:center;width:220px}
+}
+@media (prefers-reduced-motion:reduce){#spotlight .mg-slide,#spotlight .mg-img,#spotlight .deal-in{transition:none}}
+</style>
   <div class="wrap">
     <div class="services-head">
       <h2>Project spotlight</h2>
       <a class="btn" href="projects.html">All projects</a>
     </div>
-    <div class="spot">
-      <a class="card" href="project-boston.html">
-        <div class="img" style="background-image:url('assets/img/spot-boston.jpg')"></div>
-        <div class="body"><div class="meta">Boston, Massachusetts</div><h3>Article 80 modernization</h3><p>A ground-up rewrite of the 1996 article that governs Boston's large-project review, reorganized around four principles: clarity, consistency, inclusion, and responsiveness.</p></div>
-      </a>
-      <a class="card" href="project-gaithersburg.html">
-        <div class="img" style="background-image:url('assets/img/spot-gaithersburg.jpg')"></div>
-        <div class="body"><div class="meta">Gaithersburg, Maryland</div><h3>Retool Gaithersburg</h3><p>The city's first comprehensive zoning rewrite since 1965, adopted in 2024. Winner of the 2025 Maryland Sustainable Growth Award for Best Policy.</p></div>
-      </a>
-      <a class="card" href="project-palm-beach.html">
-        <div class="img" style="background-image:url('assets/img/spot-palmbeach.jpg')"></div>
-        <div class="body"><div class="meta">Palm Beach, Florida</div><h3>Once-in-a-generation code rewrite</h3><p>A 1930 code last overhauled in 1974, rebuilt to protect the town's character while addressing sea-level rise and redevelopment pressure. Context-based sub-areas replaced one-size-fits-all standards.</p></div>
-      </a>
-      <a class="card" href="project-vienna.html">
-        <div class="img" style="background-image:url('assets/img/spot-vienna.jpg')"></div>
-        <div class="body"><div class="meta">Vienna, Virginia</div><h3>First comprehensive overhaul since 1969</h3><p>Adopted in 2023. Calibrated standards along the Maple Avenue corridor, objective findings in place of discretionary steps, and a code that residents can actually read.</p></div>
-      </a>
-      <a class="card" href="project-danville.html">
-        <div class="img" style="background-image:url('assets/img/spot-danville.jpg')"></div>
-        <div class="body"><div class="meta">Danville, Virginia</div><h3>CODE Danville</h3><p>A full update of a code untouched since 2004, written to implement PLAN Danville, the city's 2024 comprehensive plan, and adopted in 2026 in under twelve months.</p></div>
-      </a>
-      <a class="card" href="project-springfield.html">
-        <div class="img" style="background-image:url('assets/img/spot-springfield.jpg')"></div>
-        <div class="body"><div class="meta">Springfield, Ohio</div><h3>Comprehensive zoning rewrite</h3><p>Decades of patchwork regulations replaced with context-based districts, right-sized parking, and a clear path for missing-middle housing and infill. Adopted 2025.</p></div>
-      </a>
+    <div class="mg" aria-roledescription="carousel" aria-label="Featured projects">
+      <div class="mg-stage">
+        <article class="mg-slide is-on" aria-roledescription="slide" aria-label="1 of 6: Boston, Massachusetts">
+          <div class="mg-img" style="background-image:url(assets/img/spot-boston.jpg)"></div>
+          <div class="mg-txt">
+            <p class="mg-place">Boston, Massachusetts</p>
+            <h3>Article 80 modernization</h3>
+            <p class="mg-desc">A ground-up rewrite of the 1996 article that governs Boston&#x27;s large-project review, reorganized around four principles: clarity, consistency, inclusion, and responsiveness.</p>
+            <div class="mg-stat"><b>1996</b><span>the article ZoneCo rewrote from the ground up</span></div>
+            <a class="btn fill" href="project-boston.html">Read the case study</a>
+          </div>
+        </article>
+        <article class="mg-slide" aria-roledescription="slide" aria-label="2 of 6: Gaithersburg, Maryland" aria-hidden="true">
+          <div class="mg-img" style="background-image:url(assets/img/spot-gaithersburg.jpg)"></div>
+          <div class="mg-txt">
+            <p class="mg-place">Gaithersburg, Maryland</p>
+            <h3>Retool Gaithersburg</h3>
+            <p class="mg-desc">The city&#x27;s first comprehensive zoning rewrite since 1965, adopted in 2024.</p>
+            <div class="mg-stat"><b>2025</b><span>Maryland Sustainable Growth Award, Best Policy</span></div>
+            <a class="btn fill" href="project-gaithersburg.html" tabindex="-1">Read the case study</a>
+          </div>
+        </article>
+        <article class="mg-slide" aria-roledescription="slide" aria-label="3 of 6: Palm Beach, Florida" aria-hidden="true">
+          <div class="mg-img" style="background-image:url(assets/img/spot-palmbeach.jpg)"></div>
+          <div class="mg-txt">
+            <p class="mg-place">Palm Beach, Florida</p>
+            <h3>Once-in-a-generation code rewrite</h3>
+            <p class="mg-desc">A 1930 code last overhauled in 1974, rebuilt to protect the town&#x27;s character while addressing sea-level rise and redevelopment pressure.</p>
+            <div class="mg-stat"><b>1974</b><span>the last time the town&#x27;s code was overhauled</span></div>
+            <a class="btn fill" href="project-palm-beach.html" tabindex="-1">Read the case study</a>
+          </div>
+        </article>
+        <article class="mg-slide" aria-roledescription="slide" aria-label="4 of 6: Vienna, Virginia" aria-hidden="true">
+          <div class="mg-img" style="background-image:url(assets/img/spot-vienna.jpg)"></div>
+          <div class="mg-txt">
+            <p class="mg-place">Vienna, Virginia</p>
+            <h3>First comprehensive overhaul since 1969</h3>
+            <p class="mg-desc">Calibrated standards along the Maple Avenue corridor, objective findings in place of discretionary steps, and a code that residents can actually read.</p>
+            <div class="mg-stat"><b>2023</b><span>adopted, after 54 years</span></div>
+            <a class="btn fill" href="project-vienna.html" tabindex="-1">Read the case study</a>
+          </div>
+        </article>
+        <article class="mg-slide" aria-roledescription="slide" aria-label="5 of 6: Danville, Virginia" aria-hidden="true">
+          <div class="mg-img" style="background-image:url(assets/img/spot-danville.jpg)"></div>
+          <div class="mg-txt">
+            <p class="mg-place">Danville, Virginia</p>
+            <h3>CODE Danville</h3>
+            <p class="mg-desc">A full update of a code untouched since 2004, written to implement PLAN Danville, the city&#x27;s 2024 comprehensive plan.</p>
+            <div class="mg-stat"><b>&lt; 12</b><span>months from start to adoption, under budget</span></div>
+            <a class="btn fill" href="project-danville.html" tabindex="-1">Read the case study</a>
+          </div>
+        </article>
+        <article class="mg-slide" aria-roledescription="slide" aria-label="6 of 6: Springfield, Ohio" aria-hidden="true">
+          <div class="mg-img" style="background-image:url(assets/img/spot-springfield.jpg)"></div>
+          <div class="mg-txt">
+            <p class="mg-place">Springfield, Ohio</p>
+            <h3>Comprehensive zoning rewrite</h3>
+            <p class="mg-desc">Decades of patchwork regulations replaced with context-based districts, right-sized parking, and a clear path for missing-middle housing and infill.</p>
+            <div class="mg-stat"><b>2025</b><span>adopted by City Council</span></div>
+            <a class="btn fill" href="project-springfield.html" tabindex="-1">Read the case study</a>
+          </div>
+        </article>
+      </div>
+      <div class="mg-thumbs" role="group" aria-label="Choose a project"><button type="button" class="mg-th is-on" aria-label="Show Boston, Massachusetts" aria-current="true"><em style="background-image:url(assets/img/spot-boston.jpg)"></em><span>Boston</span><i></i></button><button type="button" class="mg-th" aria-label="Show Gaithersburg, Maryland" aria-current="false"><em style="background-image:url(assets/img/spot-gaithersburg.jpg)"></em><span>Gaithersburg</span><i></i></button><button type="button" class="mg-th" aria-label="Show Palm Beach, Florida" aria-current="false"><em style="background-image:url(assets/img/spot-palmbeach.jpg)"></em><span>Palm Beach</span><i></i></button><button type="button" class="mg-th" aria-label="Show Vienna, Virginia" aria-current="false"><em style="background-image:url(assets/img/spot-vienna.jpg)"></em><span>Vienna</span><i></i></button><button type="button" class="mg-th" aria-label="Show Danville, Virginia" aria-current="false"><em style="background-image:url(assets/img/spot-danville.jpg)"></em><span>Danville</span><i></i></button><button type="button" class="mg-th" aria-label="Show Springfield, Ohio" aria-current="false"><em style="background-image:url(assets/img/spot-springfield.jpg)"></em><span>Springfield</span><i></i></button></div>
+    </div>
+    <div class="deal">
+      <div>
+        <h3>Every community has a story.</h3>
+        <p>We have written zoning for 105 communities in more than 20 states. Deal a card to meet one.</p>
+        <div class="deal-who" aria-live="polite"><b>Cincinnati, Ohio</b><span>Form-based code; Land Development Code; Historic Preservation Ordinance; Electronic Sign Ordinance</span><a href="project-cincinnati.html">See the project &rarr;</a></div>
+        <button type="button" class="deal-btn">Show me another</button>
+      </div>
+      <div class="deal-card"><div class="deal-in"><a class="deal-face deal-front" href="project-cincinnati.html"><img src="assets/img/posters/poster-cincinnati-oh-sm.jpg" width="400" height="618" alt="Poster: Cincinnati, Ohio"></a><a class="deal-face deal-back" href="project-cincinnati.html" tabindex="-1" aria-hidden="true"><img src="assets/img/posters/poster-cincinnati-oh-sm.jpg" width="400" height="618" alt=""></a></div></div>
     </div>
   </div>
+<script>
+(function(){
+  var root=document.getElementById('spotlight'); if(!root) return;
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* magazine rotator */
+  var slides=[].slice.call(root.querySelectorAll('.mg-slide')), th=[].slice.call(root.querySelectorAll('.mg-th'));
+  var cur=0, DUR=7000, t0=0, raf=0, paused=false, stopped=still;
+  function show(i){ cur=i; slides.forEach(function(s,k){ var on=k===i; s.classList.toggle('is-on',on); s.setAttribute('aria-hidden',on?'false':'true'); var a=s.querySelector('a'); if(a) a.tabIndex=on?0:-1; });
+    th.forEach(function(b,k){ b.classList.toggle('is-on',k===i); b.setAttribute('aria-current',k===i?'true':'false'); b.style.setProperty('--p',0); }); t0=performance.now(); }
+  function tick(now){ if(!stopped && !paused){ var p=(now-t0)/DUR; if(p>=1){ show((cur+1)%slides.length); p=0; } th[cur].style.setProperty('--p',p); } else { t0=now-(parseFloat(th[cur].style.getPropertyValue('--p'))||0)*DUR; } raf=requestAnimationFrame(tick); }
+  th.forEach(function(b,i){ b.addEventListener('click',function(){ stopped=true; show(i); th[i].style.setProperty('--p',1); }); });
+  var mg=root.querySelector('.mg');
+  mg.addEventListener('mouseenter',function(){paused=true;}); mg.addEventListener('mouseleave',function(){paused=false;});
+  mg.addEventListener('focusin',function(){paused=true;}); mg.addEventListener('focusout',function(){paused=false;});
+  show(0); if(!still) raf=requestAnimationFrame(tick); else th[0].style.setProperty('--p',1);
+  /* deal a community */
+  var D=[["project-cincinnati.html","cincinnati-oh","Cincinnati, Ohio","Form-based code; Land Development Code; Historic Preservation Ordinance; Electronic Sign Ordinance"],["project-colerain-township.html","colerain-township-oh","Colerain Township, Ohio","Zoning code rewrite"],["project-sycamore-township-oh.html","sycamore-township-oh","Sycamore Township, Ohio","Zoning diagnostic"],["project-springfield.html","springfield-oh","Springfield, Ohio","Zoning code rewrite, adopted 2025"],["project-fairborn-oh.html","fairborn-oh","Fairborn, Ohio","Zoning code rewrite"],["project-vandalia-oh.html","vandalia-oh","Vandalia, Ohio","Zoning code rewrite"],["project-clayton.html","clayton-oh","Clayton, Ohio","Zoning code rewrite"],["project-harrison-township-oh.html","harrison-township-oh","Harrison Township, Ohio","Zoning diagnostic"],["project-riverside-oh.html","riverside-oh","Riverside, Ohio","Zoning code rewrite"],["project-beavercreek-oh.html","beavercreek-oh","Beavercreek, Ohio","Zoning code rewrite"],["project-centerville.html","centerville-oh","Centerville, Ohio","Zoning code rewrite, with Gray & Pape (2026)"],["project-huber-heights-oh.html","huber-heights-oh","Huber Heights, Ohio","Zoning code rewrite (2026)"],["project-miamisburg-oh.html","miamisburg-oh","Miamisburg, Ohio","Corridor zoning"],["project-washington-township-oh.html","washington-township-oh","Washington Township, Ohio","First-ever zoning code"],["project-sidney.html","sidney-oh","Sidney, Ohio","Zoning code rewrite, adopted 2022"],["project-bowling-green.html","bowling-green-oh","Bowling Green, Ohio","Gateway District; Zoning and subdivision code rewrite"],["project-portsmouth.html","portsmouth-oh","Portsmouth, Ohio","Zoning code rewrite"],["project-buckeye-hills-oh.html","buckeye-hills-oh","Buckeye Hills, Ohio","Zoning strategy"],["project-covington-ky.html","covington-ky","Covington, Kentucky","Zoning diagnostic"],["project-florence-ky.html","florence-ky","Florence, Kentucky","Main Street district zoning"],["project-lexington.html","lexington-ky","Lexington, Kentucky","New Circle Road corridor zoning update; Legacy Park design guidelines"],["project-danville-ky.html","danville-ky","Danville, Kentucky","Municipal ordinance update; Zoning code diagnostic"],["project-south-bend.html","south-bend-in","South Bend, Indiana","Form-based code"],["project-greenfield-in.html","greenfield-in","Greenfield, Indiana","Zoning code rewrite"],["project-greenwood-in.html","greenwood-in","Greenwood, Indiana","Zoning code rewrite"],["project-leo-cedarville-in.html","leo-cedarville-in","Leo-Cedarville, Indiana","Zoning code rewrite (2026)"],["project-monroe-county-in.html","monroe-county-in","Monroe County, Indiana","Zoning code strategy"],["project-cleveland-heights.html","cleveland-heights-oh","Cleveland Heights, Ohio","Sign code rewrite; Full code rewrite (2026), with OHM Advisors, City Architecture, and Urban3"],["project-shaker-heights-oh.html","shaker-heights-oh","Shaker Heights, Ohio","Corridor zoning"],["project-university-heights-oh.html","university-heights-oh","University Heights, Ohio","Zoning code rewrite"],["project-garfield-heights.html","garfield-heights-oh","Garfield Heights, Ohio","Zoning code rewrite, finalized 2026"],["project-independence-oh.html","independence-oh","Independence, Ohio","Zoning code amendments"],["project-wickliffe-oh.html","wickliffe-oh","Wickliffe, Ohio","Corridor district zoning"],["project-aurora-oh.html","aurora-oh","Aurora, Ohio","Zoning code rewrite"],["project-twinsburg-oh.html","twinsburg-oh","Twinsburg, Ohio","Zoning code rewrite"],["project-stow-oh.html","stow-oh","Stow, Ohio","Zoning diagnostic"],["project-tallmadge-oh.html","tallmadge-oh","Tallmadge, Ohio","Zoning code rewrite"],["project-barberton-oh.html","barberton-oh","Barberton, Ohio","Zoning code rewrite"],["project-copley-township-oh.html","copley-township-oh","Copley Township, Ohio","Zoning code diagnostic"],["project-wadsworth-oh.html","wadsworth-oh","Wadsworth, Ohio","Subdivision ordinance rewrite"],["project-north-canton.html","north-canton-oh","North Canton, Ohio","Main Street zoning districts; Zoning code rewrite"],["project-canfield-oh.html","canfield-oh","Canfield, Ohio","Zoning diagnostic; Historic guidelines"],["project-canfield-township-oh.html","canfield-township-oh","Canfield Township, Ohio","Full code rewrite"],["project-girard-oh.html","girard-oh","Girard, Ohio","Zoning code diagnostic"],["project-niles-oh.html","niles-oh","Niles, Ohio","Zoning for housing"],["project-wooster-oh.html","wooster-oh","Wooster, Ohio","Zoning code rewrite"],["project-wayne-county-oh.html","wayne-county-oh","Wayne County, Ohio","Subdivision regulations rewrite"],["project-elyria-oh.html","elyria-oh","Elyria, Ohio","Zoning code rewrite"],["project-oberlin.html","oberlin-oh","Oberlin, Ohio","Zoning code and map, adopted 2026"],["project-dormont.html","dormont-pa","Dormont, Pennsylvania","Zoning code rewrite"],["project-crafton-pa.html","crafton-pa","Crafton, Pennsylvania","Zoning code rewrite"],["project-ingram-pa.html","ingram-pa","Ingram, Pennsylvania","Zoning code rewrite"],["project-columbus-oh.html","columbus-oh","Columbus, Ohio","Urban agriculture zoning analysis"],["project-gahanna-oh.html","gahanna-oh","Gahanna, Ohio","Zoning code rewrite"],["project-westerville-oh.html","westerville-oh","Westerville, Ohio","Zoning code rewrite"],["project-reynoldsburg.html","reynoldsburg-oh","Reynoldsburg, Ohio","Zoning code rewrite"],["project-whitehall-oh.html","whitehall-oh","Whitehall, Ohio","Zoning diagnostic; Zoning code rewrite"],["project-canal-winchester-oh.html","canal-winchester-oh","Canal Winchester, Ohio","Zoning code rewrite"],["project-marysville.html","marysville-oh","Marysville, Ohio","Sign code rewrite"],["project-plain-city-oh.html","plain-city-oh","Plain City, Ohio","Zoning code rewrite"],["project-powell.html","powell-oh","Powell, Ohio","Zoning code diagnostic; Zoning code rewrite, adopted 2026"],["project-orange-township.html","orange-township-oh","Orange Township, Ohio","Zoning diagnostic; Zoning code rewrite"],["project-buckeye-lake-oh.html","buckeye-lake-oh","Buckeye Lake, Ohio","Zoning code diagnostic"],["project-rockville.html","rockville-md","Rockville, Maryland","Zoning ordinance rewrite, adopted 2026"],["project-gaithersburg.html","gaithersburg-md","Gaithersburg, Maryland","Zoning code rewrite, adopted 2024"],["project-kent-county-md.html","kent-county-md","Kent County, Maryland","Zoning code rewrite"],["project-charles-county-md.html","charles-county-md","Charles County, Maryland","Zoning code rewrite"],["project-vienna.html","vienna-va","Vienna, Virginia","Zoning code rewrite, adopted 2023"],["project-purcellville-va.html","purcellville-va","Purcellville, Virginia","Zoning code rewrite"],["project-prince-william-county-va.html","prince-william-county-va","Prince William County, Virginia","Zoning code rewrite"],["project-warrenton-va.html","warrenton-va","Warrenton, Virginia","Historic preservation ordinance diagnostic; Demolition-by-neglect ordinance"],["project-danville.html","danville-va","Danville, Virginia","Zoning code rewrite, adopted 2026"],["project-southold.html","southold-ny","Southold, New York","Zoning code rewrite"],["project-plattsburgh-ny.html","plattsburgh-ny","Plattsburgh, New York","Zoning code rewrite"],["project-batavia-ny.html","batavia-ny","Batavia, New York","Zoning code rewrite"],["project-onondaga-county-ny.html","onondaga-county-ny","Onondaga County, New York","On-call zoning services"],["project-litchfield-ct.html","litchfield-ct","Litchfield, Connecticut","Zoning code rewrite"],["project-winchester-ct.html","winchester-ct","Winchester, Connecticut","Zoning code rewrite"],["project-boston.html","boston-ma","Boston, Massachusetts","Article 80 review and rewrite; Impact mitigation and community benefits"],["project-springfield-ma.html","springfield-ma","Springfield, Massachusetts","Historic preservation ordinance updates"],["project-burlington.html","burlington-vt","Burlington, Vermont","Historic preservation diagnostic"],["project-huntsville.html","huntsville-al","Huntsville, Alabama","Zoning code rewrite; Mixed-use village districts"],["project-dunwoody.html","dunwoody-ga","Dunwoody, Georgia","Sign code rewrite, adopted 2021"],["project-avondale-estates-ga.html","avondale-estates-ga","Avondale Estates, Georgia","Zoning diagnostic"],["project-statesboro-ga.html","statesboro-ga","Statesboro, Georgia","Zoning code rewrite"],["project-palm-beach.html","palm-beach-fl","Palm Beach, Florida","Zoning code rewrite"],["project-hattiesburg-ms.html","hattiesburg-ms","Hattiesburg, Mississippi","Corridor zoning"],["project-germantown-tn.html","germantown-tn","Germantown, Tennessee","Zoning diagnostic"],["project-murfreesboro.html","murfreesboro-tn","Murfreesboro, Tennessee","Sign code rewrite"],["project-hilton-head-island-sc.html","hilton-head-island-sc","Hilton Head Island, South Carolina","Zoning code diagnostic; Zoning code amendments"],["project-evanston.html","evanston-il","Evanston, Illinois","Zoning equity assessment; Zoning code rewrite"],["project-glen-ellyn.html","glen-ellyn-il","Glen Ellyn, Illinois","Full code rewrite (2026), first since 1989"],["project-geneva-il.html","geneva-il","Geneva, Illinois","Full code rewrite"],["project-royal-oak-mi.html","royal-oak-mi","Royal Oak, Michigan","Full code rewrite"],["project-edina-mn.html","edina-mn","Edina, Minnesota","Zoning code rewrite"],["project-minnetonka.html","minnetonka-mn","Minnetonka, Minnesota","Zoning code diagnostic; Zoning code rewrite"],["project-greenfield-wi.html","greenfield-wi","Greenfield, Wisconsin","Zoning code rewrite"],["project-menomonee-falls-wi.html","menomonee-falls-wi","Menomonee Falls, Wisconsin","Zoning code amendments"],["project-sun-prairie-wi.html","sun-prairie-wi","Sun Prairie, Wisconsin","Zoning code rewrite"],["project-bloomfield-wi.html","bloomfield-wi","Bloomfield, Wisconsin","Zoning code rewrite"],["project-la-crosse-wi.html","la-crosse-wi","La Crosse, Wisconsin","Full code rewrite"],["project-university-city.html","university-city-mo","University City, Missouri","Zoning code rewrite"],["project-webster-groves.html","webster-groves-mo","Webster Groves, Missouri","Zoning code rewrite (2026)"],["project-lafayette-co.html","lafayette-co","Lafayette, Colorado","Zoning code diagnostic"],["project-belgrade-mt.html","belgrade-mt","Belgrade, Montana","Zoning code rewrite; Extraterritorial zoning code"]];
+  var inn=root.querySelector('.deal-in'), front=root.querySelector('.deal-front'), back=root.querySelector('.deal-back'), who=root.querySelector('.deal-who'), last=-1, flipped=false;
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  root.querySelector('.deal-btn').addEventListener('click',function(){
+    var i; do{ i=Math.floor(Math.random()*D.length); }while(i===last); last=i; var d=D[i];
+    var face=flipped?front:back, other=flipped?back:front;
+    face.href=d[0]; face.querySelector('img').src='assets/img/posters/poster-'+d[1]+'-sm.jpg'; face.querySelector('img').alt='Poster: '+d[2];
+    face.removeAttribute('aria-hidden'); face.tabIndex=0; other.setAttribute('aria-hidden','true'); other.tabIndex=-1; other.querySelector('img').alt='';
+    flipped=!flipped; inn.classList.toggle('flip',flipped);
+    who.innerHTML='<b>'+esc(d[2])+'</b><span>'+esc(d[3])+'</span><a href="'+d[0]+'">See the project &rarr;</a>';
+  });
+})();
+</script>
 </section>
 
 <section class="band dark aw-band" id="awards" data-name="Awards">
