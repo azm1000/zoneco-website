@@ -1,7 +1,11 @@
 [build]
   publish = "."
+  # Strip internal working files from what gets published. They stay in
+  # GitHub (Claude Code still reads them); they just never reach the web.
+  command = "rm -rf .claude brand-source CLAUDE.md README.md 'START HERE - Sean.md'"
 
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    
